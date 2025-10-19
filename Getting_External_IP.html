@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+  <title>Getting External IP [GTALUG Wiki]</title>
+</head>
+
+<body>
+  <h2>Getting External IP</h2>
+  <p>Here are some ways to get your external IP using command-line.</p>
+
+  <h3>IP returned as text</h3>
+  <pre>curl -sS http://icanhazip.com/
+curl -sS http://checkip.amazonaws.com/
+curl -sS http://whatismyip.akamai.com/
+curl -sS -k https://diagnostic.opendns.com/myip
+curl -sS http://ifconfig.me/ip
+curl -sS http://ident.me/
+curl -sS http://myip.dnsomatic.com/
+curl -sS http://ip4.me/api/ | cut -d, -f2</pre>
+
+  <h3>IP buried in webpage</h3>
+  <pre>lynx -dump http://ip4.me/ | sed -ne '/You are connecting with an IPv4 Address of/ {n;p}'
+lynx -dump http://checkip.dyndns.org/ | awk '/Current IP Address:/ {print $NF}'
+lynx -dump http://ipchicken.com/ | awk '/Name Address:/ {print $NF}'
+lynx -dump http://monip.org/ | awk '/IP :/ {print $NF}'
+lynx -dump http://www.myipaddress.com/ | sed -ne "/Your computer's IP address is:/ {n;n;p}"</pre>
+
+  <h3>Special DNS query</h3>
+  <pre>dig @resolver1.opendns.com myip.opendns.com +short</pre>
+
+</body>
+</html>

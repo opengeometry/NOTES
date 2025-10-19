@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+  <title>Running Shell on Other OS</title>
+</head>
+
+<body>
+  <h2>Running Shell on Other OS</h2>
+  <p>There are times when you need Unix shell, usually for one-off script or
+  quick test. Here are ways I found to run shell on Chromebook, Android phone,
+  and Windows.</p>
+
+  <h3>Chromebook</h3>
+  <ol>
+    <li><strong>Chrome Shell</strong> – Type &lt;Ctrl-Alt-T&gt;
+    from Chrome browser or desktop to get “crosh&gt;” command
+    prompt, and then type <code>shell</code> to get a full Bash
+    shell. You have to enable Developer Mode to get access to the
+    shell command. Chromebook can be switched into Developer Mode
+    by pressing &lt;Esc-Refresh-Power&gt; and then follow
+    instructions.</li>
+    <li>
+      <strong>Crouton</strong> – Install <a href=
+      "https://goo.gl/fd3zc">crouton</a> in developer mode. It's a
+      shell script that installs Ubuntu/Debian in chroot
+      environment, so you can switch between Chrome OS and
+      Ubuntu/Debian.
+      <ul>
+        <li>
+          <a href=
+          "https://tutorials.ubuntu.com/tutorial/install-ubuntu-on-chromebook">
+          Install Ubuntu on a Chromebook</a>
+        </li>
+        <li>
+          <a href="https://github.com/dnschneid/crouton">Chromium
+          OS Universal Chroot Environment</a>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Android</h3>
+  <ol>
+    <li>
+      <strong>Termux</strong> – Install from Play Store. It's
+      Ubuntu-like command-line distro.
+      <ul>
+        <li>
+          <a href="https://termux.com/">Termux</a>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>Windows</h3>
+  <ol>
+    <li>
+      <strong>BusyBox</strong> – There is a BusyBox binary compiled
+      for 32-bit and 64-bit Windows.
+      <ul>
+        <li>
+          <a href="https://frippery.org/busybox/">BusyBox for
+          Windows</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Cygwin</strong> – Collection of Unix utilities
+      running natively on Windows.
+      <ul>
+        <li>
+          <a href="https://www.cygwin.com/">Cygwin</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Windows Subsystem for Linux</strong> (used to be
+      called <strong>Bash on Ubuntu on Windows</strong>) – Go to
+      <em>Control Panel &gt; Programs &gt; Turn Windows features on
+      or off</em>, and enable the <em>Windows Subsystem for
+      Linux</em> option. After reboot, download and install Ubuntu
+      from Windows Store.
+      <ul>
+        <li>
+          <a href=
+          "https://docs.microsoft.com/en-us/windows/wsl">Windows
+          Subsystem for Linux Documentation</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>VirtualBox</strong> (or <strong>VMware</strong> or
+      <strong>Hyper-V</strong>) – Full VM where you can install any
+      Linux distro.
+      <ul>
+        <li>
+          <a href="https://www.virtualbox.org/">Oracle VM
+          VirtualBox</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <strong>Git Bash</strong> – It's part of <strong>Git for
+      Windows</strong> application.
+      <ul>
+        <li>
+          <a href="https://gitforwindows.org/">Git for Windows</a>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</body>
+</html>
