@@ -1,7 +1,7 @@
 ## PDF for ASCII tables
 
 ### ASCII table
-The control character names are mostly generics, but what's included are the names used by Epson ESCPOS interpreter.
+The control character names are mostly generics, but what's included are the names used by Epson ESCPOS interpreter.  Similar to what you get from `man ascii`.
 * [ascii.pdf](ascii.pdf) --- full table
   - [ascii.jpg](ascii.jpg) --- in .jpg
   - [ascii.png](ascii.png) --- in .png
