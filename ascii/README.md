@@ -8,3 +8,6 @@ The control character names are mostly generics, but what's included are the nam
 
 ### Netmask
 * [netmask.pdf](netmask.pdf) -- decimal numbers for various netmasks.
+
+### Ethernet
+* [ethernet.pdf](ethernet.pdf) -- Diagram for Type A/B ethernet wiring.
