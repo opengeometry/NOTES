@@ -1,4 +1,4 @@
-Testing with few HTML files.  Directory lists are
+NOTES from my computer. Directory lists are
 1. [ascii](ascii)
 2. [networking](networking)
 3. [python](python)
