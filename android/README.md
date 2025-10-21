@@ -1,4 +1,4 @@
-## ADB related stuffs
+## Android related stuffs
 
 **ADB** (Android Debug Bridge)
   - main site --- [https://developer.android.com/tools/adb](https://developer.android.com/tools/adb)
