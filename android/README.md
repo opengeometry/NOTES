@@ -17,44 +17,43 @@ You can run ADB over USB or WiFi, but WiFi is preferred because
 
 ### 1.&emsp;Prepare phone for WiFi debug.
 
-1. Enable `Developer options` (normally hidden), by tapping `Build number` 7 times.
-2. Disable `Auto Blocker`.
-3. Enable `Wireless debugging`.
+1. Enable *Developer options* (normally hidden), by tapping *Build number* 7 times.
+2. Disable *Auto Blocker*.
+3. Enable *Wireless debugging*.
 
 ### 2.&emsp;Pair phone and desktop.
 
-On `Wireless debugging` section, you'll see
+On *Wireless debugging* section, you'll see
   - Device name
-  - IP address & Port --- eg. 192.168.1.25:22222
+  - IP address & Port --- eg. 192.168.1.25:**22222**
 
-1. Tap `Pair device with pairing code`, and you get a popup with
-   - Wi-Fi pairing code --- eg. 666777
-   - IP address & Port --- eg. 192.168.1.25:44444
+1. Tap *Pair device with pairing code*, and you get a popup with
+   - Wi-Fi pairing code --- eg. 123456
+   - IP address & Port --- eg. 192.168.1.25:**44444**
 
-2. `adb pair 192.168.1.25:44444 666777`
+2. `adb pair 192.168.1.25:44444 123456`
 
 3. `adb connect 192.168.1.25:22222`
    - Use the phone port, not the pairing port just used.
-   - Phone should say "Currently connected".
+   - Phone should say *Currently connected*.
 
 4. `adb devices`
    - The phone IP:port should be listed
 
 5. `scrcpy`
    - You can type/click on desktop, and the phone will act on those inputs.
-   - Screenshot for Samsung Galaxy A16 is ![Samsung-Galaxy-A16.png](Samsung-Galaxy-A16.png)
+   - Screenshot for Samsung Galaxy A16 ![Samsung-Galaxy-A16.png](Samsung-Galaxy-A16.png)
 
 
-### 3.&emsp;Send keyboard/mouse input to phone via ADB.
+### 3.&emsp;Send keyboard/mouse input to phone.
 
-You can send keyboard/mouse input to the phone through ADB, instead of
-manually typing and clicking.
+You can send keyboard/mouse input to the phone using ADB, instead of manually typing and clicking.
 
 1. On the front page, with Google Search in the centre,
    ```
-   adb shell input tap 540 1120              --- tap Google Search
-   adb shell input text "distrowatch.com"    --- type "distrowatch.com"
-   adb shell input keyevent KEYCODE_ENTER    --- press <Enter>
+   adb shell input tap 540 1120               --- tap Google Search
+   adb shell input text "distrowatch.com"     --- type "distrowatch.com"
+   adb shell input keyevent KEYCODE_ENTER     --- press <Enter>
    ```
 
 3. There are other keycodes:
@@ -90,10 +89,10 @@ manually typing and clicking.
 
 ### 4.&emsp;Determine X and Y positions.
 
-1. Enable `Pointer location`.
+1. Enable *Pointer location*.
    - X,Y positions of screen touch will be printed at the top of screen.
 
 2. `adb shell getevent -l`
-   - `ABS_MT_POSITION_X` --- x position in hex
-   - `ABS_MT_POSITION_Y` --- y position in hex
+   - ABS_MT_POSITION_X --- x position in hex
+   - ABS_MT_POSITION_Y --- y position in hex
 
