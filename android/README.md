@@ -31,7 +31,8 @@ On **Wireless debugging** section, you'll see
    - Wi-Fi pairing code --- eg. 123456
    - IP address & Port --- eg. 192.168.1.25:44444
 
-2. `adb pair 192.168.1.25:44444 123456`
+2. `adb pair 192.168.1.25:44444`
+    - Enter the pairing code --- eg. 123456.
 
 3. `adb connect 192.168.1.25:22222`
    - Use the phone port, not the pairing port just used.
