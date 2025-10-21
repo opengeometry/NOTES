@@ -8,10 +8,10 @@
   - website --- [scrcpy.org](scrcpy.org)
   - repository --- [https://github.com/Genymobile/scrcpy/ ](https://github.com/Genymobile/scrcpy/)
 
-You can run ADB over USB or WiFi.  WiFi is preferred, because 
+You can run ADB over USB or WiFi, but WiFi is preferred because 
   - it frees up USB port for charging,
   - no messy cables, and
-  - you can do debugging from VM.
+  - you can debug from VM.
 
 ---
 
