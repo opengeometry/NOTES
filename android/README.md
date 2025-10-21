@@ -15,13 +15,13 @@ You can run ADB over USB or WiFi.  WiFi is preferred, because
 
 ---
 
-### Prepare phone for WiFi debug.
+### 1.  Prepare phone for WiFi debug.
 
 1. Enable `Developer options` (normally hidden), by tapping `Build number` 7 times.
 2. Disable `Auto Blocker`.
 3. Enable `Wireless debugging`.
 
-### Pair phone and desktop.
+### 2.  Pair phone and desktop.
 
 On `Wireless debugging` section, you'll see
   - Device name
@@ -45,7 +45,7 @@ On `Wireless debugging` section, you'll see
    - Screenshot for Samsung Galaxy A16 is ![Samsung-Galaxy-A16.png](Samsung-Galaxy-A16.png)
 
 
-### Send keyboard/mouse input to phone via ADB.
+### 3.  Send keyboard/mouse input to phone via ADB.
 
 You can send keyboard/mouse input to the phone through ADB, instead of
 manually typing and clicking.
@@ -88,7 +88,7 @@ manually typing and clicking.
      KEYCODE_TAB
      ```
 
-### Determine X and Y positions.
+### 4.  Determine X and Y positions.
 
 1. Enable `Pointer location`.
    - X,Y positions of screen touch will be printed at the top of screen.
