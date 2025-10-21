@@ -42,6 +42,7 @@ On `Wireless debugging` section, you'll see
 
 5. `scrcpy`
    - You can type/click on desktop, and the phone will act on those inputs.
+   - Screenshot for Samsung Galaxy A16 is ![Samsung-Galaxy-A16.png](Samsung-Galaxy-A16.png)
 
 
 ### Send keyboard/mouse input to phone via ADB.
