@@ -17,25 +17,25 @@ You can run ADB over USB or WiFi, but WiFi is preferred because
 
 ### 1.&emsp;Prepare phone for WiFi debug.
 
-1. Enable *Developer options* (normally hidden), by tapping *Build number* 7 times.
-2. Disable *Auto Blocker*.
-3. Enable *Wireless debugging*.
+1. Enable **Developer options** (normally hidden), by tapping **Build number** 7 times.
+2. Disable **Auto Blocker**.
+3. Enable **Wireless debugging**.
 
 ### 2.&emsp;Pair phone and desktop.
 
-On *Wireless debugging* section, you'll see
+On **Wireless debugging** section, you'll see
   - Device name
-  - IP address & Port --- eg. 192.168.1.25:**22222**
+  - IP address & Port --- eg. 192.168.1.25:22222
 
-1. Tap *Pair device with pairing code*, and you get a popup with
+1. Tap **Pair device with pairing code**, and you get a popup with
    - Wi-Fi pairing code --- eg. 123456
-   - IP address & Port --- eg. 192.168.1.25:**44444**
+   - IP address & Port --- eg. 192.168.1.25:44444
 
 2. `adb pair 192.168.1.25:44444 123456`
 
 3. `adb connect 192.168.1.25:22222`
    - Use the phone port, not the pairing port just used.
-   - Phone should say *Currently connected*.
+   - Phone should say "Currently connected".
 
 4. `adb devices`
    - The phone IP:port should be listed
@@ -89,7 +89,7 @@ You can send keyboard/mouse input to the phone using ADB, instead of manually ty
 
 ### 4.&emsp;Determine X and Y positions.
 
-1. Enable *Pointer location*.
+1. Enable **Pointer location**.
    - X,Y positions of screen touch will be printed at the top of screen.
 
 2. `adb shell getevent -l`
