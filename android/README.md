@@ -1,10 +1,10 @@
 ## Android related stuffs
 
-**ADB** (Android Debug Bridge)
+- **ADB** (Android Debug Bridge)
   - main site --- [https://developer.android.com/tools/adb](https://developer.android.com/tools/adb)
   - standalone version --- [https://developer.android.com/studio/releases/platform-tools](https://developer.android.com/studio/releases/platform-tools)
 
-**scrcpy** (Android Screen Mirroring Tool) which runs on top of ADB.
+- **scrcpy** (Android Screen Mirroring Tool) which runs on top of ADB.
   - website --- [scrcpy.org](scrcpy.org)
   - repository --- [https://github.com/Genymobile/scrcpy/ ](https://github.com/Genymobile/scrcpy/)
 
