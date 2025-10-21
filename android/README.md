@@ -17,9 +17,7 @@ You can run ADB over USB or WiFi.  WiFi is preferred, because
 
 ### Prepare phone for WiFi debug.
 
-1. Enable `Developer options` (normally hidden).
-   - tap `Build number` 7 times
-   - `Developer options` should appear at the bottom of Settings, just below `About phone`.
+1. Enable `Developer options` (normally hidden), by tapping `Build number` 7 times.
 2. Disable `Auto Blocker`.
 3. Enable `Wireless debugging`.
 
@@ -30,10 +28,10 @@ On `Wireless debugging` section, you'll see
   - IP address & Port --- eg. 192.168.1.25:22222
 
 1. Tap `Pair device with pairing code`, and you get a popup with
-   - Wi-Fi pairing code --- 6-digit
+   - Wi-Fi pairing code --- eg. 666777
    - IP address & Port --- eg. 192.168.1.25:44444
 
-2. `adb pair 192.168.1.25:44444`
+2. `adb pair 192.168.1.25:44444 666777`
 
 3. `adb connect 192.168.1.25:22222`
    - Use the phone port, not the pairing port just used.
