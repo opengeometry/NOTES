@@ -50,19 +50,20 @@ On **Wireless debugging** section, you'll see
 
 You can send keyboard/mouse input to the phone using ADB, instead of manually typing and clicking.
 
-1. On the front page, with Google Search in the centre,
+1. To jump to Distrowatch website from the front page,
    ```
+   adb shell input text KEYCODE_HOME          --- go to front page
    adb shell input tap 540 1120               --- tap Google Search
    adb shell input text "distrowatch.com"     --- type "distrowatch.com"
    adb shell input keyevent KEYCODE_ENTER     --- press <Enter>
    ```
 
 3. There are other keycodes:
-   - 3 buttons at the bottom (recent apps, home, back)
+   - 3 buttons at the bottom (app list, home, back)
      ```
-     KEYCODE_RECENT_APPS
+     KEYCODE_RECENT_APPS or KEYCODE_APP_SWITCH
      KEYCODE_HOME
-     KEYCODE_BACK
+     KEYCODE_BACK 
      ```
 
    - phone related
@@ -83,9 +84,9 @@ You can send keyboard/mouse input to the phone using ADB, instead of manually ty
      KEYCODE_MINUS
      KEYCODE_SLASH
      KEYCODE_SPACE
-     KEYCODE_DEL
-     KEYCODE_ENTER
+     KEYCODE_DEl
      KEYCODE_TAB
+     KEYCODE_ENTER
      ```
 
 ### 4. &nbsp; Determine X and Y positions.
