@@ -37,19 +37,13 @@ From command line,
     sudo zypper install kernel-devel gcc make
     ```
 
-2. Install Guest Additions.
-
-   **all**:
+2. Install Guest Additions.  Add user to group **vboxsf** if you've configured "Shared Folders".
    ```
    sudo /.../VBoxLinuxAdditions.run
-   ```
-
-3. Add user to group **vboxsf**.
-   ```
    sudo usermod -a -G vboxsf {user}
    ```
 
-4. Reboot.
+4. Reboot to pickup new kernel modules and new group id.
    ```
    sudo reboot
    ```
