@@ -1,4 +1,6 @@
-## Networking related stuffs
+# Networking related stuffs
+
+## PDF tables
 
 ### Netmask
 * [netmask.pdf](netmask.pdf) --- decimal numbers for various netmasks
