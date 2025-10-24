@@ -1,3 +1,5 @@
+# ASCII related stuffs
+
 ## ASCII table
 
 The control character names are mostly generics, but what's included are the names used by Epson ESCPOS interpreter.
