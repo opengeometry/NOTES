@@ -3,14 +3,14 @@
 ## Setting display memory to 256MB
 
 From GUI,
-  1. Enable *3D Acceleration*
-  2. Set *Video Memory* to max (256MB)
+  1. Enable "3D Acceleration"
+  2. Set "Video Memory" to max (256MB)
   3. Save
-  4. **Go back** and disable *3D Acceleration*.  Check the video memory is still 256MB.
+  4. **Go back** and disable "3D Acceleration".  Check the video memory is still 256MB.
   5. Save **again**
 
 From command line,
-  1. `VBoxManage modifyvm "VM_Name" --vram 256`
+  1. `VBoxManage modifyvm {VM Name} --vram 256`
 
 
 ## Loading Guest Addition
@@ -33,7 +33,7 @@ From command line,
     **OpenSUSE**:
     ```
     sudo zypper refresh
-    sudo zypper dist-upgrade (or dup)
+    sudo zypper dist-upgrade  # or dup
     sudo zypper install kernel-devel gcc make
     ```
 
@@ -43,4 +43,9 @@ From command line,
    ```
    sudo /.../VBoxLinuxAdditions.run
    sudo reboot
+   ```
+
+3. Add user to group "vboxsf".
+   ```
+   sudo usermod -a -G vboxsf {user}
    ```
