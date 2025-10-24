@@ -3,11 +3,11 @@
 ## Setting display memory to 256MB
 
 From GUI,
-  1. Enable "3D Acceleration"
-  2. Set "Video Memory" to max (256MB)
+  1. Enable **3D Acceleration**
+  2. Set **Video Memory** to max (256MB)
   3. Save
-  4. **Go back** and disable "3D Acceleration".  Check the video memory is still 256MB.
-  5. Save **again**
+  4. Go back and disable **3D Acceleration**.  Check the video memory is still 256MB.
+  5. Save again
 
 From command line,
   1. `VBoxManage modifyvm {VM Name} --vram 256`
@@ -44,7 +44,7 @@ From command line,
    sudo /.../VBoxLinuxAdditions.run
    ```
 
-3. Add user to group "vboxsf".
+3. Add user to group **vboxsf**.
    ```
    sudo usermod -a -G vboxsf {user}
    ```
