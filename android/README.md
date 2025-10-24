@@ -1,4 +1,6 @@
-## Android related stuffs
+# Android related stuffs
+
+## Automated Debugging
 
 - **ADB** (Android Debug Bridge)
   - main site --- [https://developer.android.com/tools/adb](https://developer.android.com/tools/adb)
@@ -12,8 +14,6 @@ You can run ADB over USB or WiFi, but WiFi is preferred because
   - it frees up USB port for charging,
   - no messy cables, and
   - you can debug from VM.
-
----
 
 ### 1. &nbsp; Prepare phone for WiFi debug.
 
@@ -44,7 +44,6 @@ On **Wireless debugging** section, you'll see
 5. `scrcpy`
    - You can type/click on desktop, and the phone will act on those inputs.
    - Screenshot for Samsung Galaxy A16 ![Samsung-Galaxy-A16.png](Samsung-Galaxy-A16.png)
-
 
 ### 3. &nbsp; Send keyboard/mouse input to phone.
 
