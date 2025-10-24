@@ -37,15 +37,19 @@ From command line,
     sudo zypper install kernel-devel gcc make
     ```
 
-2. Install Guest Additions.  Reboot to use the VirtualBox kernel modules.
+2. Install Guest Additions.
 
    **all**:
    ```
    sudo /.../VBoxLinuxAdditions.run
-   sudo reboot
    ```
 
 3. Add user to group "vboxsf".
    ```
    sudo usermod -a -G vboxsf {user}
+   ```
+
+4. Reboot.
+   ```
+   sudo reboot
    ```
