@@ -58,7 +58,7 @@ From command line,
    poweroff
    ```
 
-2. From host OS, compact the disk file.
+2. From host OS, compact the disk.
    ```
    VBoxManage modifymedium {file}.vdi --compact
    ```
