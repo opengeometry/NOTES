@@ -47,3 +47,18 @@ From command line,
    ```
    sudo reboot
    ```
+
+## Compacting disk
+
+1. From guest OS, fill all available disk space with zeros.
+   ```
+   sudo dd if=/dev/zero of=z bs=1M     # fill with zeros
+   sync
+   sudo rm z      # leaving the zeros on disk
+   poweroff
+   ```
+
+2. From host OS, compact the disk file.
+   ```
+   VBoxManage modifymedium {file}.vdi --compact
+   ```
