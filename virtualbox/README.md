@@ -24,10 +24,10 @@ From command line,
     sudo apt install build-essential dkms linux-headers-$(uname -r)
     ```
 
-    **Redhat/CentOS/Fedora**:
+    **Fedora**:
     ```
     sudo dnf distro-sync
-    sudo dnf install kernel-devel kernel-headers gcc make bzip2
+    sudo dnf install kernel-devel kernel-headers dkms gcc make bzip2
     ```
 
     **OpenSUSE**:
