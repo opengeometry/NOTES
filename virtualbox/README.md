@@ -27,7 +27,7 @@ From command line,
     **Redhat/CentOS/Fedora**:
     ```
     sudo dnf distro-sync
-    sudo dnf install kernel-devel kernel-headers gcc make bzip2 elfutils-libelf-devel
+    sudo dnf install kernel-devel kernel-headers gcc make bzip2
     ```
 
     **OpenSUSE**:
