@@ -27,14 +27,13 @@ From command line,
     **Fedora**:
     ```
     sudo dnf distro-sync
-    sudo dnf remove virtualbox-guest-additions    # remove old version
     sudo dnf install kernel-devel kernel-headers dkms gcc make bzip2
     ```
 
     **OpenSUSE**:
     ```
     sudo zypper refresh
-    sudo zypper dist-upgrade    # or dup
+    sudo zypper dist-upgrade
     sudo zypper install kernel-devel gcc make
     ```
 
