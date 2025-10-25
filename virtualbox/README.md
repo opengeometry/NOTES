@@ -50,7 +50,7 @@ From command line,
 
 ## Compacting disk
 
-1. From host OS, remove all snapshots of the VM.
+1. Remove all snapshots linked to the disk.
    
 2. From guest OS, fill all available disk space with zeros.
    ```
