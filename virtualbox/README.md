@@ -50,7 +50,9 @@ From command line,
 
 ## Compacting disk
 
-1. From guest OS, fill all available disk space with zeros.
+1. From host OS, remove all snapshots of the VM.
+   
+2. From guest OS, fill all available disk space with zeros.
    ```
    sudo dd if=/dev/zero of=z bs=1M     # fill with zeros
    sync
@@ -58,7 +60,7 @@ From command line,
    poweroff
    ```
 
-2. From host OS, compact the disk.
+3. From host OS, compact the disk.
    ```
    VBoxManage modifymedium {file}.vdi --compact
    ```
