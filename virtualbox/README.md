@@ -10,7 +10,17 @@ From GUI,
   5. Save again
 
 From command line,
-  1. `VBoxManage modifyvm {VM_Name} --vram 256`
+```
+VBoxManage modifyvm {VM_Name} --vram 256
+```
+
+
+## Setting memory and cpu
+
+Sometimes, you need to change **memory** and **cpu**, depending on your system load.
+```
+VBoxManage modifyvm {VM_Name} --memory=4096 --cpus=2
+```
 
 
 ## Loading Guest Addition
@@ -47,6 +57,7 @@ From command line,
    ```
    sudo reboot
    ```
+
 
 ## Compacting disk (not for BTRFS):
 
