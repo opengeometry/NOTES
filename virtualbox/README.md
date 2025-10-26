@@ -10,7 +10,7 @@ From GUI,
   5. Save again
 
 From command line,
-  1. `VBoxManage modifyvm {VM Name} --vram 256`
+  1. `VBoxManage modifyvm {VM_Name} --vram 256`
 
 
 ## Loading Guest Addition
