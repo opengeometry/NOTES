@@ -47,3 +47,19 @@ From command line,
    ```
    sudo reboot
    ```
+
+## Compacting disk (not for BTRFS):
+
+1. Remove all **snapshots** of the VM.
+
+2. From guest OS, fill all available disk space with zeros.
+   ```
+   cp /dev/zero z; sync    # fill with zeros
+   rm z; sync              # leaving the zeros on disk
+   poweroff
+   ```
+
+3. From host OS, compact the disk.
+   ```
+   VBoxManage modifymedium {file.vdi} --compact
+   ```
