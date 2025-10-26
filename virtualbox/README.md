@@ -21,20 +21,20 @@ From command line,
     ```
     sudo apt update
     sudo apt dist-upgrade
-    sudo apt install build-essential dkms linux-headers-$(uname -r)
+    sudo apt install build-essential dkms
     ```
 
     **Fedora**:
     ```
     sudo dnf distro-sync
-    sudo dnf install kernel-devel kernel-headers dkms gcc make bzip2
+    sudo dnf install kernel-devel kernel-headers dkms
     ```
 
     **OpenSUSE**:
     ```
     sudo zypper refresh
     sudo zypper dist-upgrade
-    sudo zypper install kernel-devel gcc make
+    sudo zypper install kernel-devel
     ```
 
 2. Install Guest Additions.  Add user to group **vboxsf** if you've configured "Shared Folders".
@@ -46,21 +46,4 @@ From command line,
 4. Reboot to pickup new kernel modules and new group id.
    ```
    sudo reboot
-   ```
-
-## Compacting disk
-
-1. Remove all snapshots linked to the disk.
-   
-2. From guest OS, fill all available disk space with zeros.
-   ```
-   sudo dd if=/dev/zero of=z bs=1M     # fill with zeros
-   sync
-   sudo rm z      # leaving the zeros on disk
-   poweroff
-   ```
-
-3. From host OS, compact the disk.
-   ```
-   VBoxManage modifymedium {file}.vdi --compact
    ```
