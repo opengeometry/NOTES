@@ -1,17 +1,17 @@
 # VirtualBox related stuffs
 
-## Setting display memory to 256MB
+## Setting display memory to 256MB max
 
 From GUI,
   1. Enable **3D Acceleration**
-  2. Set **Video Memory** to max (256MB)
+  2. Set **Video Memory** to 256MB max.
   3. Save
   4. Go back and disable **3D Acceleration**.  Check the video memory is still 256MB.
   5. Save again
 
 From command line,
 ```
-VBoxManage modifyvm {VM_Name} --vram 256
+VBoxManage modifyvm "VM_Name" --vram 256
 ```
 
 
@@ -19,7 +19,7 @@ VBoxManage modifyvm {VM_Name} --vram 256
 
 Sometimes, you need to change **memory** and **cpu**, depending on your system load.
 ```
-VBoxManage modifyvm {VM_Name} --memory=4096 --cpus=2
+VBoxManage modifyvm "VM_Name" --memory=4096 --cpus=2
 ```
 
 
@@ -50,7 +50,7 @@ VBoxManage modifyvm {VM_Name} --memory=4096 --cpus=2
 2. Install Guest Additions.  Add user to group **vboxsf** if you've configured "Shared Folders".
    ```
    sudo /.../VBoxLinuxAdditions.run
-   sudo usermod -a -G vboxsf {user}
+   sudo usermod -a -G vboxsf "user"
    ```
 
 4. Reboot to pickup new kernel modules and new group id.
@@ -72,5 +72,5 @@ VBoxManage modifyvm {VM_Name} --memory=4096 --cpus=2
 
 3. From host OS, compact the disk.
    ```
-   VBoxManage modifymedium {file.vdi} --compact
+   VBoxManage modifymedium "file.vdi" --compact
    ```
