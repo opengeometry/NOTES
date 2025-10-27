@@ -1,25 +1,14 @@
 # VirtualBox related stuffs
 
-## Setting display memory to 256MB max
+## Setting Video Memory, Base Memory, and CPU
 
-From GUI,
-  1. Enable **3D Acceleration**
-  2. Set **Video Memory** to 256MB max.
-  3. Save
-  4. Go back and disable **3D Acceleration**.  Check the video memory is still 256MB.
-  5. Save again
+- For **Video Memory**, normal maximum is 128MB.
+- If you turn on/off **3D Acceleration**, you can set to 256MB max.
+- Sometimes, you need to change **Base Memory** and **CPU**, depending on your system load.
 
 From command line,
 ```
-VBoxManage modifyvm "VM_Name" --vram 256
-```
-
-
-## Setting memory and cpu
-
-Sometimes, you need to change **memory** and **cpu**, depending on your system load.
-```
-VBoxManage modifyvm "VM_Name" --memory=4096 --cpus=2
+VBoxManage modifyvm "VM_Name" --vram 256 --memory=4096 --cpus=2
 ```
 
 
