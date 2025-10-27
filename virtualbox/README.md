@@ -2,8 +2,7 @@
 
 ## Setting Video Memory, Base Memory, and CPU
 
-- For **Video Memory**, normal maximum is 128MB.
-- If you turn on/off **3D Acceleration**, you can set to 256MB max.
+- For **Video Memory**, 128MB is the normal maximum. If you turn on/off **3D Acceleration**, 256MB is the max.
 - Sometimes, you need to change **Base Memory** and **CPU**, depending on your system load.
 
 From command line,
