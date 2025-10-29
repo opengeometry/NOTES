@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # William Park <opengeometry@yahoo.ca>
-# 2025
+# 2019-2025
 #
 Usage()
 {
