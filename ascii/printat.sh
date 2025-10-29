@@ -18,17 +18,16 @@ Description:
 
 	If argument is ASCII name/char, then print the ASCII value.  
 
-	If it's decimal [0-9]+, hex [0-9a-fA-F]+h, 0x[0-9a-fA-F]+, or binary
-	[01]+b, then print the number in little-endian format.
-
-	If the number is inside word(...), print only the last 2 bytes.  If
-	dword(...), print the last 4 bytes.  If a number starts with '
-	(apostrophe), treat the number as string, like spreadsheet does.
+	If it's decimal [0-9]+, hex [0-9a-fA-F]+h, 0x[0-9a-fA-F]+, then print
+	the number in little-endian format.  If the number is inside word(...),
+	print only the last 2 bytes.  If dword(...), print the last 4 bytes.  If
+	a number starts with ' (apostrophe), treat the number as string, like
+	spreadsheet does.
 
 	Otherwise, it's string, so print it verbatim.
 
-	    printat.sh NUL ESC		# 0x00 0x1b
-	    printat.sh 0 48 1bh 0x1b	# NUL 0 ESC ESC
+	    printat.sh NUL ESC			# 0x00 0x1b
+	    printat.sh 0 48 1bh 0x1b		# NUL 0 ESC ESC
 	    printat.sh word(258)		# 0x02 0x01
 	    printat.sh dword(0x04030201)	# 0x01 0x02 0x03 0x04
 	    printat.sh abcd			# abcd
@@ -41,7 +40,8 @@ Description:
     3. printat.sh -r < bin > asc
 
 	If '-r' is the only argument, then do the reverse.  Convert binary to
-	ASCII name/char.  Similar to 'od -a' but uppercase ASCII name/char.
+	ASCII name/char.  Similar to 'od -a' but uppercase ASCII name/char, and
+	no line breaks.
 
     4. printat.sh -h
 
@@ -128,11 +128,10 @@ print_name_to_bin() 		# name > bin
 	# ASCII char
 	?) echo -n "$name" ;;
 
-	# Number: decimal [0-9]+, hex HHh or 0xHH, binary [01]+b
+	# Number: decimal [0-9]+, hex HHh or 0xHH
 	+([0-9])		) ;&
 	0x+([[:xdigit:]])	) ;&
-	+([[:xdigit:]])h	) ;&
-	+([01])b		)
+	+([[:xdigit:]])h	)
 	    number=$(string_to_integer $name)
 	    print_number_bin $number
 	    ;;
@@ -140,8 +139,7 @@ print_name_to_bin() 		# name > bin
 	# word(...)
 	word\(+([0-9])\)		) ;&
 	word\(0x+([[:xdigit:]])\)	) ;&
-	word\(+([[:xdigit:]])h\)	) ;&
-	word\(+([01])b\)		)
+	word\(+([[:xdigit:]])h\)	)
 	    number=${name#word\(}
 	    number=${number%\)}
 	    number=$(string_to_integer $number)
@@ -151,8 +149,7 @@ print_name_to_bin() 		# name > bin
 	# dword(...)
 	dword\(+([0-9])\)		) ;&
 	dword\(0x+([[:xdigit:]])\)	) ;&
-	dword\(+([[:xdigit:]])h\)	) ;&
-	dword\(+([01])b\)		)
+	dword\(+([[:xdigit:]])h\)	)
 	    number=${name#dword\(}
 	    number=${number%\)}
 	    number=$(string_to_integer $number)
@@ -162,8 +159,7 @@ print_name_to_bin() 		# name > bin
 	# Number string, eg. '123
 	\'+([0-9])		) ;&
 	\'0x+([[:xdigit:]])	) ;&
-	\'+([[:xdigit:]])h	) ;&
-	\'+([01])b		)
+	\'+([[:xdigit:]])h	)
 	    echo -n "${name#\'}"
 	    ;;
 
