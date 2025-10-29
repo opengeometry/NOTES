@@ -16,7 +16,7 @@ Similar to what you get from `man ascii`.
 
 ### [printat.sh](printat.sh)
 
-Shell script to convert ASCII to/from Binary.
+Shell script to convert ASCII name to binary data, or binary data to ASCII name.
 
 #### Usage
 1. `printat.sh asc... > bin`
@@ -29,12 +29,11 @@ Shell script to convert ASCII to/from Binary.
 
    If argument is ASCII name/char, then print the ASCII value.  
 
-   If it's decimal `[0-9]+`, hex `[0-9a-fA-F]+h` or `0x[0-9a-fA-F]+`, or binary
-   `[01]+b`, then print the number in little-endian format.
-
-   If the number is inside `word(...)`, print only the last 2 bytes.  If
-   `dword(...)`, print the last 4 bytes.  If a number starts with `'`
-   (apostrophe), treat the number as string, like spreadsheet does.
+   If it's decimal `[0-9]+`, hex `[0-9a-fA-F]+h` or `0x[0-9a-fA-F]+`, then print
+   the number in little-endian format. If the number is inside `word(...)`,
+   print only the last 2 bytes.  If `dword(...)`, print the last 4 bytes.  If
+   a number starts with `'` (apostrophe), treat the number as string, like
+   spreadsheet does.
 
    Otherwise, it's string, so print it verbatim.
    ```
@@ -45,16 +44,17 @@ Shell script to convert ASCII to/from Binary.
    printat.sh abcd                 # abcd
    ```
    
-2. `printat.sh < asc > bin`
+3. `printat.sh < asc > bin`
 
    Same, but read from file instead of command line.  Contents will be
    broken up into whitespace separated words.
 
-3. `printat.sh -r < bin > asc`
+4. `printat.sh -r < bin > asc`
 
    If `-r` is the only argument, then do the reverse.  Convert binary to
-   ASCII name/char.  Similar to `od -a` but uppercase ASCII name/char.
+   ASCII name/char.  Similar to `od -a` but uppercase ASCII name/char, and
+   no line breaks.
    
-4. `printat.sh -h`
+6. `printat.sh -h`
 
    Print this.
