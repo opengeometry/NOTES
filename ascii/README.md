@@ -18,8 +18,13 @@ Similar to what you get from `man ascii`.
 
 Shell script to convert ASCII to/from Binary.
 
-**Usage**:
+#### Usage
+1. `printat.sh asc... > bin`
+2. `printat.sh < asc > bin`
+3. `printat.sh -r < bin > asc`
+4. `printat.sh -h`
 
+#### Description
 1. `printat.sh asc... > bin`
 
    If argument is ASCII name/char, then print the ASCII value.  
@@ -40,16 +45,16 @@ Shell script to convert ASCII to/from Binary.
    printat.sh abcd                 # abcd
    ```
    
-3. `printat.sh < asc > bin`
+2. `printat.sh < asc > bin`
 
    Same, but read from file instead of command line.  Contents will be
    broken up into whitespace separated words.
 
-4. `printat.sh -r < bin > asc`
+3. `printat.sh -r < bin > asc`
 
    If `-r` is the only argument, then do the reverse.  Convert binary to
    ASCII name/char.  Similar to `od -a` but uppercase ASCII name/char.
    
-6. `printat.sh -h`
+4. `printat.sh -h`
 
    Print this.
