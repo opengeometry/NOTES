@@ -1,5 +1,10 @@
 # BeagleBone Black (BBB) related stuffs
 
+  - [create_keyboard.sh](create_keyboard.sh) --- creates a new USB Gadget device `/dev/hidg0`.
+  - [send_functions.sh](send_functions.sh) --- collection of shell functions
+  - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
+
+
 ## BBB as scriptable keyboard
 
 You can make BBB into a keyboard using USB Gadget driver.  This means,
@@ -17,6 +22,7 @@ It worked for older images (Debian 8.7, 9.9, 10.13).  But, for newer images
 
 My work here solves these problems, and allows you to turn BBB into a scriptable keyboard,
 using newer kernels (6.17.7 is the latest confirmed).
+
 
 ### Compiling kernel
 
@@ -56,6 +62,7 @@ cd $KBUILD_OUTPUT
     tar -cJf ~/boot/headers-$KBUILD_OUTPUT.tar.xz headers_install
 ```
 
+
 ### Installing kernel
 
 Copy the tarballs to BBB, and install them to
@@ -75,6 +82,7 @@ mkinitramfs -o initrd.img-$KBUILD_OUTPUT $KBUILD_OUTPUT
 cp initrd.img-$KBUILD_OUTPUT /boot
 ```
 
+
 ### Configuring /boot/uEnv.txt
 
 BBB will look for `uname_r` files when it boots.
@@ -86,7 +94,21 @@ BBB will look for `uname_r` files when it boots.
 uname_r=6.17.7-kb
 ```
 
+
 ### Creating USB keyboard device
 
-Original script is [create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
-I rewrote it for newer images: [create_keyboard.sh].
+```
+sudo ./create_keyboard.sh
+```
+which will create `/dev/hidg0`.  It's rewrite of original script 
+[create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
+
+
+### Sending strings
+
+```
+sudo send_line.sh arg...
+```
+which will send the string arguments, separated by a space and terminated by newline.
+It's as though you typed the strings yourself on a real keyboard.  It's rewrite of original
+Python2 script into Shell script for the newer BBB images.
