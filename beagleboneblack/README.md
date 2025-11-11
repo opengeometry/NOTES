@@ -1,0 +1,92 @@
+# BeagleBone Black (BBB) related stuffs
+
+## BBB as scriptable keyboard
+
+You can make BBB into a keyboard using USB Gadget driver.  This means,
+you can send out "key presses" from USB device port (mini-USB).  From USB host side,
+it appears just like another keyboard.
+
+Original work was done by Phil Polstra (@ppolstra)
+  - [DEFCON-23-Phil-Polstra-Extras.rar](https://media.defcon.org/DEF%20CON%2023/DEF%20CON%2023%20presentations/DEF%20CON%2023%20-%20Phil-Polstra-Extras.rar)
+  - [UDeck](https://github.com/ppolstra/UDeck)
+
+It worked for older images (Debian 8.7, 9.9, 10.13).  But, for newer images 
+(Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x),
+  - most USB Gadget drivers are builtin, and
+  - UDeck's scripts are written in Python2, which is not available in repository anymore.
+
+My work here solves these problems, and allows you to turn BBB into a scriptable keyboard,
+using newer kernels (6.17.7 is the latest confirmed).
+
+### Compiling kernel
+
+It's similiar to compiling a kernel on PC, except you also need to install **.dtb**.
+You can compile on BBB (slooow) or cross-compile on PC (faster, recommended).
+It would go like
+```
+sudo apt install libssl-dev gcc-arm-linux-gnueabihf
+
+export KBUILD_OUTPUT=5.10.168-kb
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-gnueabihf- 
+
+make kernelversion
+cp config-5.10.168-ti-r83 $KBUILD_OUTPUT/.config
+vi  +/USB_F_ACM=  $_
+    # CONFIG_LOCALVERSION=""          --> "-kb"
+    # CONFIG_USB_F_ACM=y              --> n
+    # CONFIG_USB_F_SERIAL=y           --> n
+    # CONFIG_USB_CONFIGFS_SERIAL=y    --> n
+    # CONFIG_USB_CONFIGFS_ACM=y       --> n
+make oldconfig
+make kernelrelease
+
+make  all
+make  zinstall          INSTALL_PATH=boot_install
+make  dtbs_install      INSTALL_PATH=boot_install
+make  modules_install   INSTALL_MOD_PATH=modules_install
+make  headers_install   INSTALL_HDR_PATH=headers_install
+```
+You now have a new kernel and stuffs.  To collect them into your own directory,
+say `~/boot`,
+```
+cd $KBUILD_OUTPUT
+    tar -cJf ~/boot/boot-$KBUILD_OUTPUT.tar.xz boot_install
+    tar -cJf ~/boot/modules-$KBUILD_OUTPUT.tar.xz modules_install
+    tar -cJf ~/boot/headers-$KBUILD_OUTPUT.tar.xz headers_install
+```
+
+### Installing kernel
+
+Copy the tarballs to BBB, and install them to
+  - /boot
+  - /boot/dtbs
+  - /lib/modules
+
+My BBB boots okay without *initrd.img*, but you may want to generate it for completeness.
+```
+export KBUILD_OUTPUT=5.10.168-kb
+
+tar -xJf boot-$KBUILD_OUTPUT.tar.xz --strip-components=2 -C /boot --no-same-owner --no-same-permissions
+tar  -xJf  modules-$KBUILD_OUTPUT.tar.xz  --strip-components=4  -C /lib/modules --no-same-owner --no-same-permissions
+
+depmod $KBUILD_OUTPUT
+mkinitramfs -o initrd.img-$KBUILD_OUTPUT $KBUILD_OUTPUT
+cp initrd.img-$KBUILD_OUTPUT /boot
+```
+
+### Configuring /boot/uEnv.txt
+
+BBB will look for `uname_r` files when it boots.
+```
+#uname_r=5.10.168-ti-r83
+#uname_r=5.10.168-kb
+#uname_r=6.12.55-kb
+#uname_r=6.17.5-kb
+uname_r=6.17.7-kb
+```
+
+### Creating USB keyboard device
+
+Original script is [create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
+I rewrote it for newer images: [create_keyboard.sh].
