@@ -18,7 +18,7 @@ Original work was done by Phil Polstra (@ppolstra)
 It worked for older images (Debian 8.7, 9.9, 10.13).  But, It doesn't work for newer images 
 (Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x), because
   - most USB Gadget drivers are builtin, and
-  - original scripts are written in Python2 which is not available in repository anymore.
+  - original scripts were written in Python2 which is no longer available.
 
 My work here solves these problems for the newer kernels (6.17.7 is the latest confirmed).
 
