@@ -8,19 +8,8 @@
 #	- media.defcon.org/DEF CON 23/DEF CON 23 presentations/DEFCON-23-Phil-Polstra-Extras.rar
 #	- github.com/ppolstra/UDeck/
 #
-case $1 in
-    start)
-	echo "$0 $*" 1>&2	# print to stderr for logging
-	;;
-    stop)
-	echo "$0 $*" 1>&2	# print to stderr for logging
-	exit 0		# nothing to do
-	;;
-    *)	
-	echo "Usage:  sudo $(basename $0) {start|stop}"
-	exit 2
-	;;
-esac
+# Usage:  sudo $(basename $0)
+#
 
 mkdir_cd()
 {
@@ -32,7 +21,7 @@ sync_sleep()
     sync && sleep $1
 }
 
-send_report_descriptor_kb_bin()
+cat_report_descriptor_kb_bin()
 {
     xxd -r -p <<EOF
 	05 01 09 06 a1 01 05 07 19 e0 29 e7 15 00 25 01
@@ -111,7 +100,7 @@ if mkdir_cd $KB_DIR/functions/hid.usb0; then
     echo 1 > subclass
     echo 8 > report_length
     #cp report_descriptor_kb.bin report_desc
-    send_report_descriptor_kb_bin > report_desc 
+    cat_report_descriptor_kb_bin > report_desc 
     sync_sleep 3
 fi
 
