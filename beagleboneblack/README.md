@@ -15,10 +15,10 @@ Original work was done by Phil Polstra (@ppolstra)
   - [DEFCON-23-Phil-Polstra-Extras.rar](https://media.defcon.org/DEF%20CON%2023/DEF%20CON%2023%20presentations/DEF%20CON%2023%20-%20Phil-Polstra-Extras.rar)
   - [UDeck](https://github.com/ppolstra/UDeck)
 
-It worked for older images (Debian 8.7, 9.9, 10.13).  But, for newer images 
-(Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x),
+It worked for older images (Debian 8.7, 9.9, 10.13).  But, It doesn't work for newer images 
+(Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x), because
   - most USB Gadget drivers are builtin, and
-  - UDeck's scripts are written in Python2, which is not available in repository anymore.
+  - original scripts are written in Python2 which is not available in repository anymore.
 
 My work here solves these problems for the newer kernels (6.17.7 is the latest confirmed).
 
