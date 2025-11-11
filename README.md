@@ -1,8 +1,9 @@
-NOTES from my computer. Directory lists are
-1. [android](android)
-2. [ascii](ascii)
-3. [networking](networking)
-4. [python](python)
-5. [shell](shell)
-6. [tex](tex)
-7. [virtualbox](virtualbox)
+NOTES from my computer. Lists are
+1. [Android](android)
+2. [Ascii](ascii)
+3. [BeagleBone Black](beagleboneblack)
+4. [Networking](networking)
+5. [Python](python)
+6. [Shell](shell)
+7. [TeX/LaTeX](tex)
+8. [VirtualBox](virtualbox)
