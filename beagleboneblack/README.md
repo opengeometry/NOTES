@@ -99,7 +99,7 @@ uname_r=6.17.7-kb
 ```
 sudo ./create_keyboard.sh
 ```
-which will create `/dev/hidg0`.  It's rewrite of original script 
+will create `/dev/hidg0`.  It's rewrite of original script 
 [create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
 
 
@@ -108,6 +108,6 @@ which will create `/dev/hidg0`.  It's rewrite of original script
 ```
 sudo send_line.sh arg...
 ```
-which will send the string arguments, separated by a space and terminated by newline.
+will send the string arguments, separated by a space and terminated by newline.
 It's as though you typed the strings yourself on a real keyboard.  It's rewrite of original
 Python2 script into Shell script for the newer BBB images.
