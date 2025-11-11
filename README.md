@@ -1,6 +1,6 @@
 NOTES from my computer. Lists are
 1. [Android](android)
-2. [Ascii](ascii)
+2. [ASCII](ascii)
 3. [BeagleBone Black](beagleboneblack)
 4. [Networking](networking)
 5. [Python](python)
