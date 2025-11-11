@@ -1,6 +1,6 @@
 # BeagleBone Black (BBB) related stuffs
 
-  - [create_keyboard.sh](create_keyboard.sh) --- creates a new USB Gadget device `/dev/hidg0`.
+  - [create_keyboard.sh](create_keyboard.sh) --- creates USB Gadget device.
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
 
@@ -20,8 +20,7 @@ It worked for older images (Debian 8.7, 9.9, 10.13).  But, for newer images
   - most USB Gadget drivers are builtin, and
   - UDeck's scripts are written in Python2, which is not available in repository anymore.
 
-My work here solves these problems, and allows you to turn BBB into a scriptable keyboard,
-using newer kernels (6.17.7 is the latest confirmed).
+My work here solves these problems for the newer kernels (6.17.7 is the latest confirmed).
 
 
 ### Compiling kernel
