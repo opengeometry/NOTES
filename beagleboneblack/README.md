@@ -106,7 +106,7 @@ will create `/dev/hidg0`.  It's rewrite of original script
 ### Sending strings
 
 ```
-sudo send_line.sh arg...
+sudo ./send_line.sh arg...
 ```
 will send the string arguments, separated by a space and terminated by newline.
 It's as though you typed the strings yourself on a real keyboard.  It's rewrite of original
