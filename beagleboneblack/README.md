@@ -110,8 +110,7 @@ will create USB Gadget device `/dev/hidg0`.  It's rewrite of original script
 sudo ./send_line.sh arg...
 ```
 will send the string arguments, separated by a space and terminated by newline.
-It's as though you typed the strings on a real keyboard.  
-
-It sources `send_funtions.sh` which is rewrite of original Python2 script 
+It's as though you typed the strings on a real keyboard.  It sources `send_funtions.sh`
+which is rewrite of original Python2 script 
 [udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py)
 in Shell.
