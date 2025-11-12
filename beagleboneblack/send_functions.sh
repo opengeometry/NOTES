@@ -3,13 +3,11 @@
 # William Park <opengeometry@yahoo.ca>
 # 2018-2025
 #
-# Functions needed to send key press to /dev/hidg0.
-#
 # The original script (udeckHid.py) was written by Phil Polstra.  
 #     - media.defcon.org/DEF CON 23/DEF CON 23 presentations/DEFCON-23-Phil-Polstra-Extras.rar
 #     - github.com/ppolstra/UDeck/
 #
-# Rewritten in shell, because newer BBB images don't have Python2.
+# Rewritten for newer BBB images, because Python2 is no longer available.
 # 
 
 LeftCtrl=1

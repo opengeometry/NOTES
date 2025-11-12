@@ -3,12 +3,16 @@
 # William Park <opengeometry@yahoo.ca>
 # 2018-2025
 #
-# This script creates a USB HID keyboard device on BBB.  The original script
-# (create-hid.sh) was written by Phil Polstra:
+# Usage:  sudo $(basename $0)
+#
+# This script creates USB Gadget device (/dev/hidg0), so that it can act as USB
+# keyboard.
+#
+# The original script (create-hid.sh) was written by Phil Polstra:
 #	- media.defcon.org/DEF CON 23/DEF CON 23 presentations/DEFCON-23-Phil-Polstra-Extras.rar
 #	- github.com/ppolstra/UDeck/
-#
-# Usage:  sudo $(basename $0)
+# 
+# Rewritten for newer BBB images.
 #
 
 mkdir_cd()
