@@ -88,10 +88,10 @@ cp initrd.img-$KBUILD_OUTPUT /boot
 BBB will look for `uname_r` files when it boots.
 ```
 #uname_r=5.10.168-ti-r83
-#uname_r=5.10.168-kb
+uname_r=5.10.168-kb
 #uname_r=6.12.55-kb
 #uname_r=6.17.5-kb
-uname_r=6.17.7-kb
+#uname_r=6.17.7-kb
 ```
 
 
