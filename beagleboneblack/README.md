@@ -15,7 +15,7 @@ Original work was done by Phil Polstra (@ppolstra)
   - [DEFCON-23-Phil-Polstra-Extras.rar](https://media.defcon.org/DEF%20CON%2023/DEF%20CON%2023%20presentations/DEF%20CON%2023%20-%20Phil-Polstra-Extras.rar)
   - [UDeck](https://github.com/ppolstra/UDeck)
 
-It worked for older images (Debian 8.7, 9.9, 10.13).  But, It doesn't work for newer images 
+It worked for older images (Debian 8.7, 9.9, 10.13).  But, it doesn't work for newer images 
 (Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x), because
   - most USB Gadget drivers are builtin, and
   - original scripts were written in Python2 which is no longer available.
