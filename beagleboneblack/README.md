@@ -74,8 +74,8 @@ My BBB boots okay without *initrd.img*, but you may want to generate it for comp
 ```
 export KBUILD_OUTPUT=5.10.168-kb
 
-tar -xJf boot-$KBUILD_OUTPUT.tar.xz --strip-components=2 -C /boot --no-same-owner --no-same-permissions
-tar  -xJf  modules-$KBUILD_OUTPUT.tar.xz  --strip-components=4  -C /lib/modules --no-same-owner --no-same-permissions
+tar -xJf boot-$KBUILD_OUTPUT.tar.xz --strip-components=1 -C /boot --no-same-owner --no-same-permissions
+tar  -xJf  modules-$KBUILD_OUTPUT.tar.xz  --strip-components=3  -C /lib/modules --no-same-owner --no-same-permissions
 
 depmod $KBUILD_OUTPUT
 mkinitramfs -o initrd.img-$KBUILD_OUTPUT $KBUILD_OUTPUT
