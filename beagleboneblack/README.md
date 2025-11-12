@@ -57,9 +57,9 @@ You now have a new kernel and stuffs.  To collect them into your own directory,
 say `~/boot`,
 ```
 cd $KBUILD_OUTPUT
-    tar  -cJf  ~/boot/boot-$KBUILD_OUTPUT.tar.xz     boot_install
-    tar  -cJf  ~/boot/modules-$KBUILD_OUTPUT.tar.xz  modules_install
-    tar  -cJf  ~/boot/headers-$KBUILD_OUTPUT.tar.xz  headers_install
+  tar  -cJf  ~/boot/boot-$KBUILD_OUTPUT.tar.xz     boot_install
+  tar  -cJf  ~/boot/modules-$KBUILD_OUTPUT.tar.xz  modules_install
+  tar  -cJf  ~/boot/headers-$KBUILD_OUTPUT.tar.xz  headers_install
 ```
 
 
