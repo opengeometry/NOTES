@@ -7,7 +7,7 @@
 
 ## BBB as scriptable keyboard
 
-You can make BBB into a keyboard using USB Gadget driver.  This means,
+You can make BBB into a scriptable keyboard using USB Gadget driver.  This means,
 you can send out "key presses" from USB device port (mini-USB).  From USB host side,
 it appears just like another keyboard.
 
@@ -18,7 +18,7 @@ Original work was done by Phil Polstra (@ppolstra)
 It worked for older images (Debian 8.7, 9.9, 10.13).  But, it doesn't work for newer images 
 (Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x), because
   - most USB Gadget drivers are builtin, and
-  - original scripts were written in Python2 which is no longer available.
+  - original scripts were written in Python2 which is no longer available in repository.
 
 My work here solves these problems for newer kernels (6.17.7 is the latest confirmed)
 and newer BBB images.
@@ -100,7 +100,7 @@ uname_r=6.17.7-kb
 ```
 sudo ./create_keyboard.sh
 ```
-will create `/dev/hidg0`.  It's rewrite of original script 
+will create USB Gadget device `/dev/hidg0`.  It's rewrite of original script 
 [create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
 
 
@@ -110,7 +110,7 @@ will create `/dev/hidg0`.  It's rewrite of original script
 sudo ./send_line.sh arg...
 ```
 will send the string arguments, separated by a space and terminated by newline.
-It's as though you typed the strings yourself on a real keyboard.  
+It's as though you typed the strings on a real keyboard.  
 
 It sources `send_funtions.sh` which is rewrite of original Python2 script 
 [udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py)
