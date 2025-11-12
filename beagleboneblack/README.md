@@ -109,5 +109,8 @@ will create `/dev/hidg0`.  It's rewrite of original script
 sudo ./send_line.sh arg...
 ```
 will send the string arguments, separated by a space and terminated by newline.
-It's as though you typed the strings yourself on a real keyboard.  It's rewrite of original
-Python2 script into Shell script for the newer BBB images.
+It's as though you typed the strings yourself on a real keyboard.  
+
+It sources `send_funtions.sh` which is rewrite of original Python2 script 
+[udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py)
+in Shell, because the newer BBB images don't have Python2 available.
