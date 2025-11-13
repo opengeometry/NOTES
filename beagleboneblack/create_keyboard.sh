@@ -88,16 +88,14 @@ do_start()
     fi
 
     if mkdir_cd $KB_DIR; then
-	# echo 0x1337 > idVendor
-	# echo 0x1337 > idProduct
-	echo 0x1d6b > idVendor	# Linux Foundation
-	echo 0x0104 > idProduct	# Multifunction Composite Gadget
-	echo 0x0100 > bcdDevice	# v1.0.0
-	echo 0x0110 > bcdUSB	# 0x0110=USB1.1, 0x0200=USB2
+	echo 0x1d6b > idVendor	    # Linux Foundation
+	echo 0x0104 > idProduct	    # Multifunction Composite Gadget
+	echo 0x0100 > bcdDevice	    # v1.0.0
+	echo 0x0110 > bcdUSB	    # 0x0110=USB1.1, 0x0200=USB2
     fi
 
     if mkdir_cd $KB_DIR/functions/hid.usb0; then
-	echo 1 > protocol		# Keyboard
+	echo 1 > protocol	    # Keyboard
 	echo 1 > subclass
 	echo 8 > report_length
 	cat_report_descriptor_keyboard > report_desc 
