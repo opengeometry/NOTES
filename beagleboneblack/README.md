@@ -53,8 +53,9 @@ make  dtbs_install     INSTALL_PATH=boot_install
 make  modules_install  INSTALL_MOD_PATH=modules_install
 make  headers_install  INSTALL_HDR_PATH=headers_install
 ```
-You now have a new kernel and stuffs.  To collect them into your own directory,
-say `~/boot`,
+You now have a new kernel and stuffs.  On Fedora, for some reason, `make zinstall`
+line doen't work, so you have to copy the 3 files manually.
+To collect them into your own directory, say `~/boot`,
 ```
 cd $KBUILD_OUTPUT
   tar  -cJf  ~/boot/boot-$KBUILD_OUTPUT.tar.xz     boot_install
