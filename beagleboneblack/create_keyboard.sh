@@ -23,14 +23,16 @@ mkdir_cd()
     mkdir $1 && cd $1
 }
 
-cat_report_descriptor_kb_bin()
+# https://www.usb.org/sites/default/files/documents/hid1_11.pdf
+# E.6 Report Descriptor (Keyboard), p69
+#
+cat_report_descriptor_keyboard()
 {
     xxd -r -p <<EOF
 	05 01 09 06 a1 01 05 07 19 e0 29 e7 15 00 25 01
 	75 01 95 08 81 02 95 01 75 08 81 01 95 05 75 01
 	05 08 19 01 29 05 91 02 95 01 75 03 91 01 95 06
-	75 08 15 00 26 ff 00 05 07 19 00 2a ff 00 81 00
-	c0
+	75 08 15 00 25 65 05 07 19 00 29 65 81 00 c0
 EOF
 }
 
@@ -98,8 +100,7 @@ do_start()
 	echo 1 > protocol		# Keyboard
 	echo 1 > subclass
 	echo 8 > report_length
-	#cp report_descriptor_kb.bin report_desc
-	cat_report_descriptor_kb_bin > report_desc 
+	cat_report_descriptor_keyboard > report_desc 
     fi
 
     if mkdir_cd $KB_DIR/configs/c.1; then
@@ -111,6 +112,8 @@ do_start()
     if cd $KB_DIR; then
 	basename -a /sys/class/udc/musb-hdrc.* > UDC
     fi
+
+    sync
 }
 
 
@@ -124,6 +127,8 @@ do_stop()
     rmdir $KB_DIR/configs/c.1
     rmdir $KB_DIR/functions/hid.usb0
     rmdir $KB_DIR
+
+    sync
 }
 
 
