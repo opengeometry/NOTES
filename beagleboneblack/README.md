@@ -84,6 +84,17 @@ cp initrd.img-$KBUILD_OUTPUT /boot
 ```
 
 
+### Configuring kernel modules
+
+The 2 modules (`usb_f_acm`, `usb_f_serial`) must be blacklisted, so that they don't 
+conflict with `usb_f_hid` which is what I want to access.  So, add a file with
+```
+blacklist usb_f_acm
+blacklist usb_f_serial
+```
+to `/etc/modprobe.d`.
+
+
 ### Configuring /boot/uEnv.txt
 
 BBB will look for `uname_r` files when it boots.
