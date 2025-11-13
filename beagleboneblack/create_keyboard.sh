@@ -3,7 +3,7 @@
 # William Park <opengeometry@yahoo.ca>
 # 2018-2025
 #
-# Usage:  sudo $(basename $0)
+# Usage:  sudo ./create_keyboard.sh {start|stop}
 #
 # This script creates USB Gadget device (/dev/hidg0), so that it can act as USB
 # keyboard.
@@ -15,14 +15,12 @@
 # Rewritten for newer BBB images.
 #
 
+KB_DIR=/sys/kernel/config/usb_gadget/kb
+
+
 mkdir_cd()
 {
     mkdir $1 && cd $1
-}
-
-sync_sleep()
-{
-    sync && sleep $1
 }
 
 cat_report_descriptor_kb_bin()
@@ -36,7 +34,7 @@ cat_report_descriptor_kb_bin()
 EOF
 }
 
-#
+
 # Debian 7.5, 7.9, 7.11:
 # ----------------------
 # - g_multi	-- can't remove it, can't blacklist it.
@@ -44,14 +42,14 @@ EOF
 #
 # Debian 8.3, 8.7:
 # ----------------
-#modprobe usb_f_hid
+# modprobe usb_f_hid
 #
 # /etc/modprobe.d/bbb-blacklist.conf:
 #	blacklist usb_f_acm
 #
 # Debian 9.5, 9.9, 10.3, 10.13:
 # -----------------------------
-modprobe usb_f_hid
+# modprobe usb_f_hid
 #
 # /etc/modprobe.d/bbb-blacklist.conf:
 #	blacklist usb_f_acm
@@ -78,45 +76,79 @@ modprobe usb_f_hid
 #	blacklist usb_f_acm
 #	blacklist usb_f_serial
 #
+do_start()
+{
+    modprobe usb_f_hid
 
-sync_sleep 3
+    # Mount configfs, if it's not already mounted.
+    if ! mountpoint -q /sys/kernel/config ; then
+	mount -t configfs none /sys/kernel/config
+    fi
 
-# Mount configfs, if it's not already mounted.
-if ! mountpoint -q /sys/kernel/config ; then
-    mount -t configfs none /sys/kernel/config
-    sync_sleep 3
-fi
+    if mkdir_cd $KB_DIR; then
+	# echo 0x1337 > idVendor
+	# echo 0x1337 > idProduct
+	echo 0x1d6b > idVendor	# Linux Foundation
+	echo 0x0104 > idProduct	# Multifunction Composite Gadget
+	echo 0x0100 > bcdDevice	# v1.0.0
+	echo 0x0110 > bcdUSB	# 0x0110=USB1.1, 0x0200=USB2
+    fi
 
-KB_DIR=/sys/kernel/config/usb_gadget/kb
+    if mkdir_cd $KB_DIR/functions/hid.usb0; then
+	echo 1 > protocol		# Keyboard
+	echo 1 > subclass
+	echo 8 > report_length
+	#cp report_descriptor_kb.bin report_desc
+	cat_report_descriptor_kb_bin > report_desc 
+    fi
 
-if mkdir_cd $KB_DIR; then
-    # echo 0x1337 > idVendor
-    # echo 0x1337 > idProduct
-    echo 0x1d6b > idVendor	# Linux Foundation
-    echo 0x0104 > idProduct	# Multifunction Composite Gadget
-    echo 0x0100 > bcdDevice	# v1.0.0
-    echo 0x0110 > bcdUSB	# 0x0110=USB1.1, 0x0200=USB2
-    sync_sleep 3
-fi
+    if mkdir_cd $KB_DIR/configs/c.1; then
+	echo 500 > MaxPower
+	ln -sf $KB_DIR/functions/hid.usb0
+    fi
 
-if mkdir_cd $KB_DIR/functions/hid.usb0; then
-    echo 1 > protocol		# Keyboard
-    echo 1 > subclass
-    echo 8 > report_length
-    #cp report_descriptor_kb.bin report_desc
-    cat_report_descriptor_kb_bin > report_desc 
-    sync_sleep 3
-fi
+    # Activate keyboard device.
+    if cd $KB_DIR; then
+	basename -a /sys/class/udc/musb-hdrc.* > UDC
+    fi
+}
 
-if mkdir_cd $KB_DIR/configs/c.1; then
-    echo 500 > MaxPower
-    ln -sf $KB_DIR/functions/hid.usb0
-    sync_sleep 3
-fi
 
-# Activate keyboard device.
+# Undo what has been done, in reverse order.
 #
-if cd $KB_DIR; then
-    basename -a /sys/class/udc/musb-hdrc.* > UDC
-    sync_sleep 3
-fi
+do_stop()
+{
+    echo "" > $KB_DIR/UDC	# deactivate
+
+    rm $KB_DIR/configs/c.1/hid.usb0
+    rmdir $KB_DIR/configs/c.1
+    rmdir $KB_DIR/functions/hid.usb0
+    rmdir $KB_DIR
+}
+
+
+case $1 in
+    start) 
+	if [ -c /dev/hidg0 ]; then
+	    echo "$0 $*: /dev/hidg0 is already active."
+	else
+	    echo "$0 $*"
+	    do_start
+	fi
+	;;
+
+    stop) 
+	if [ -c /dev/hidg0 ]; then
+	    echo "$0 $*"
+	    do_stop
+	else
+	    echo "$0 $*: /dev/hidg0 is not active."
+	fi
+	;;
+
+    *)
+	echo "Usage:  sudo $0 {start|stop}"
+	exit 2
+	;;
+esac 1>&2	# print to stderr for logging
+

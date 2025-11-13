@@ -242,3 +242,4 @@ sendMute()         {  sendKey  0  0x7f;  }
 sendVolumeUp()     {  sendKey  0  0x80;  }
 sendVolumeDown()   {  sendKey  0  0x81;  }
 
+sendWindow()	   {  sendKey  8  0x00;  }	# Windows key only
