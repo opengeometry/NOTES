@@ -98,7 +98,7 @@ uname_r=5.10.168-kb
 ### Creating USB keyboard device
 
 ```
-sudo ./create_keyboard.sh
+sudo ./create_keyboard.sh start
 ```
 will create USB Gadget device `/dev/hidg0`.  It's rewrite of original script 
 [create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
@@ -114,3 +114,11 @@ It's as though you typed the strings on a real keyboard.  It sources `send_funti
 which is rewrite of original Python2 script 
 [udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py)
 in Shell.
+
+
+### Removing USB keyboard device
+
+```
+sudo ./create_keyboard.sh stop
+```
+will deactivate and remove `/dev/hidg0`, and cleanup back to before.
