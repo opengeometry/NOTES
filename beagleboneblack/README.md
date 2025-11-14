@@ -87,11 +87,11 @@ cp initrd.img-$KBUILD_OUTPUT /boot
 ### Configuring kernel modules
 
 The 2 modules (`usb_f_acm`, `usb_f_serial`) must be blacklisted, 
+so that they don't conflict with `usb_f_hid` which is what I want to access.
 ```
 blacklist usb_f_acm
 blacklist usb_f_serial
 ```
-so that they don't conflict with `usb_f_hid` which is what I want to access.
 
 
 ### Configuring /boot/uEnv.txt
@@ -105,16 +105,10 @@ uname_r=5.10.168-kb
 
 ### Creating/Removing USB keyboard device
 
-- `sudo ./create_keyboard.sh start` \
-  will create USB Gadget device `/dev/hidg0`.
-- `sudo ./create_keyboard.sh stop` \
-  will deactivate and cleanup back to before.
-
+- `sudo ./create_keyboard.sh start` --- will create USB Gadget device `/dev/hidg0`.
+- `sudo ./create_keyboard.sh stop` --- will deactivate and cleanup back to before.
 
 ### Sending strings
 
-```
-sudo ./send_line.sh arg...
-```
-will send the string arguments, separated by a space and terminated by newline.
-It's as though you typed the line on a real keyboard.
+- `sudo ./send_line.sh arg...` --- will send the string arguments, separated by
+  a space and terminated by newline.  It's as though you typed the line on a real keyboard.
