@@ -108,8 +108,7 @@ uname_r=5.10.168-kb
 ```
 sudo ./create_keyboard.sh start
 ```
-will create USB Gadget device `/dev/hidg0`.  It's rewrite of original script 
-[create-hid.sh](https://github.com/ppolstra/UDeck/blob/master/create-hid.sh).
+will create USB Gadget device `/dev/hidg0`.
 
 ```
 sudo ./create_keyboard.sh stop
@@ -123,7 +122,4 @@ will deactivate and remove `/dev/hidg0`, and cleanup back to before.
 sudo ./send_line.sh arg...
 ```
 will send the string arguments, separated by a space and terminated by newline.
-It's as though you typed the strings on a real keyboard.  It sources `send_funtions.sh`
-which is rewrite of original Python2 script 
-[udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py)
-in Shell.
+It's as though you typed the line on a real keyboard.
