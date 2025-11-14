@@ -128,7 +128,7 @@ do_start()
 	basename -a /sys/class/udc/musb-hdrc.* > UDC
     fi
 
-    sync /sys/kernel/config
+    sync && sleep 0
 }
 
 
@@ -142,7 +142,7 @@ do_stop()
     rmdir  $KB_DIR/functions/hid.usb0
     rmdir  $KB_DIR
 
-    sync /sys/kernel/config
+    sync && sleep 0
 }
 
 
