@@ -38,12 +38,12 @@ export CROSS_COMPILE=arm-linux-gnueabihf-
 
 make kernelversion
 cp config-5.10.168-ti-r83 $KBUILD_OUTPUT/.config
-vi  +/USB_F_ACM=  $_
-    # CONFIG_LOCALVERSION=""          --> "-kb"
-    # CONFIG_USB_F_ACM=y              --> n
-    # CONFIG_USB_F_SERIAL=y           --> n
-    # CONFIG_USB_CONFIGFS_SERIAL=y    --> n
-    # CONFIG_USB_CONFIGFS_ACM=y       --> n
+sed -e /^CONFIG_USB_F_ACM=/s/=y/=n/ \
+    -e /^CONFIG_USB_F_SERIAL=/s/=y/=n/ \
+    -e /^CONFIG_USB_CONFIGFS_SERIAL=/s/=y/=n/ \
+    -e /^CONFIG_USB_CONFIGFS_ACM=/s/=y/=n/ \
+    -e '/^CONFIG_LOCALVERSION=/s/=.*/="-kb"/' \
+    -i $KBUILD_OUTPUT/.config
 make oldconfig
 make kernelrelease
 
