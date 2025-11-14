@@ -105,14 +105,10 @@ uname_r=5.10.168-kb
 
 ### Creating/Removing USB keyboard device
 
-- Create USB Gadget device `/dev/hidg0`:
-  ```
-  sudo ./create_keyboard.sh start
-  ```
-- Deactivate and cleanup back to before:
-  ```
-  sudo ./create_keyboard.sh stop
-  ```
+- `sudo ./create_keyboard.sh start` \
+  will create USB Gadget device `/dev/hidg0`.
+- `sudo ./create_keyboard.sh stop` \
+  will deactivate and cleanup back to before.
 
 
 ### Sending strings
