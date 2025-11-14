@@ -24,18 +24,35 @@ mkdir_cd()
 }
 
 # https://www.usb.org/sites/default/files/documents/hid1_11.pdf
-# E.6 Report Descriptor (Keyboard), p69
+#   Firmware Specification 6/27/01
+#   Version 1.11
+#   E.6 Report Descriptor (Keyboard), p69
 #
 cat_report_descriptor_keyboard()
 {
     xxd -r -p <<EOF
-	05 01 09 06 a1 01 05 07 19 e0 29 e7 15 00 25 01
-	75 01 95 08 81 02 95 01 75 08 81 01 95 05 75 01
-	05 08 19 01 29 05 91 02 95 01 75 03 91 01 95 06
-	75 08 15 00 25 65 05 07 19 00 29 65 81 00 c0
+	05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01
+	75 01 95 08 81 02 95 01  75 08 81 01 95 05 75 01
+	05 08 19 01 29 05 91 02  95 01 75 03 91 01 95 06
+	75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0
 EOF
+
 }
 
+# https://docs.kernel.org/usb/gadget-testing.html
+# Two differences:
+#	Input (constant)    81 01 | 81 03
+#	Output (constant)   91 01 | 91 03
+#
+cat_report_descriptor_keyboard2()
+{
+    xxd -r -p <<EOF
+	05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01
+	75 01 95 08 81 02 95 01  75 08 81 03 95 05 75 01
+	05 08 19 01 29 05 91 02  95 01 75 03 91 03 95 06
+	75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0
+EOF
+}
 
 # Debian 7.5, 7.9, 7.11:
 # ----------------------
@@ -82,7 +99,6 @@ do_start()
 {
     modprobe usb_f_hid
 
-    # Mount configfs, if it's not already mounted.
     if ! mountpoint -q /sys/kernel/config ; then
 	mount -t configfs none /sys/kernel/config
     fi
@@ -98,7 +114,8 @@ do_start()
 	echo 1 > protocol	    # Keyboard
 	echo 1 > subclass
 	echo 8 > report_length
-	cat_report_descriptor_keyboard > report_desc 
+	#cat_report_descriptor_keyboard > report_desc 
+	cat_report_descriptor_keyboard2 > report_desc 
     fi
 
     if mkdir_cd $KB_DIR/configs/c.1; then
@@ -111,22 +128,21 @@ do_start()
 	basename -a /sys/class/udc/musb-hdrc.* > UDC
     fi
 
-    sync
+    sync /sys/kernel/config
 }
 
 
 # Undo what has been done, in reverse order.
-#
 do_stop()
 {
     echo "" > $KB_DIR/UDC	# deactivate
 
-    rm $KB_DIR/configs/c.1/hid.usb0
-    rmdir $KB_DIR/configs/c.1
-    rmdir $KB_DIR/functions/hid.usb0
-    rmdir $KB_DIR
+    rm     $KB_DIR/configs/c.1/hid.usb0
+    rmdir  $KB_DIR/configs/c.1
+    rmdir  $KB_DIR/functions/hid.usb0
+    rmdir  $KB_DIR
 
-    sync
+    sync /sys/kernel/config
 }
 
 
