@@ -1,7 +1,7 @@
 # William Park <opengeometry@yahoo.ca>
 # 2018-2025
 #
-# Usage:  make {start_keyboard|stop_keyboard}
+# Usage:  make {start|stop}
 #
 # This script creates USB Gadget device (/dev/hidg0), so that it can act as
 # USB keyboard.
@@ -18,13 +18,14 @@ HID_USB0_DIR  :=  $(KB_DIR)/functions/hid.usb0
 C_1_DIR       :=  $(KB_DIR)/configs/c.1
 DEVICE        :=  /dev/hidg0
 
-.PHONY: help start_keyboard stop_keyboard 
+.PHONY: help start stop
 
 
 help:
-	@echo "Usage:  sudo make {start_keyboard|stop_keyboard}"
+	@echo "Usage:  sudo make {start|stop}"
 
-start_keyboard:  report_descriptor_keyboard.bin  report_descriptor_keyboard2.bin
+
+start:  report_descriptor_keyboard.bin  report_descriptor_keyboard2.bin
 ifeq ($(wildcard $(DEVICE)),$(DEVICE))
 	$(error $(DEVICE) is already active)
 endif
@@ -59,7 +60,7 @@ endif
 
 # Undo what has been done, in reverse order.
 #
-stop_keyboard:
+stop:
 ifeq ($(wildcard $(DEVICE)),)
 	$(error $(DEVICE) is already deactivated)
 endif
