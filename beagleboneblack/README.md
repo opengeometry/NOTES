@@ -20,7 +20,7 @@ It worked for older images (Debian 8.7, 9.9, 10.13).  But, it doesn't work for n
   - most USB Gadget drivers are builtin, and
   - original scripts were written in Python2 which is no longer available in repository.
 
-My work here solves these problems for newer kernels (6.17.7 is the latest confirmed)
+My work here solves these problems for newer kernels (6.17.8 is the latest confirmed)
 and newer BBB images.
 
 
