@@ -1,7 +1,7 @@
 # William Park <opengeometry@yahoo.ca>
 # 2018-2025
 #
-# Usage:  make {start|stop}
+# Usage:  sudo make {start|stop}
 #
 # This script creates USB Gadget device (/dev/hidg0), so that it can act as
 # USB keyboard.
@@ -11,6 +11,10 @@
 #	- github.com/ppolstra/UDeck/
 # 
 # Rewritten for newer BBB images.
+#
+# Reference:
+# 	https://docs.kernel.org/usb/gadget_configfs.html
+# 	https://docs.kernel.org/filesystems/configfs.html
 #
 
 KB_DIR        :=  /sys/kernel/config/usb_gadget/kb
@@ -66,10 +70,10 @@ ifeq ($(wildcard $(DEVICE)),)
 endif
 	echo > $(KB_DIR)/UDC		# deactivate keyboard device
 
-	rm    $(KB_DIR)/configs/c.1/hid.usb0
-	rmdir $(KB_DIR)/configs/c.1/strings/0x409
-	rmdir $(KB_DIR)/configs/c.1
-	rmdir $(KB_DIR)/functions/hid.usb0
+	rm    $(C_1_DIR)/hid.usb0
+	rmdir $(C_1_DIR)/strings/0x409
+	rmdir $(C_1_DIR)
+	rmdir $(HID_USB0_DIR)
 	rmdir $(KB_DIR)/strings/0x409
 	rmdir $(KB_DIR)
 
