@@ -2,8 +2,8 @@
 #
 # Usage:  $0 string...
 #
-# It sends out strings to USB host.  Strings are separated with SP, and
-# the line ends with LF.
+# It sends out strings to USB host.  Strings are separated with SP, and the
+# line ends with LF.
 #
 
 BASEDIR=$(dirname $(realpath $0))

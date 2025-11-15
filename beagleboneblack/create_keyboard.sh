@@ -5,8 +5,8 @@
 #
 # Usage:  sudo ./create_keyboard.sh {start|stop}
 #
-# This script creates USB Gadget device (/dev/hidg0), so that it can act as USB
-# keyboard.
+# This script creates USB Gadget device (/dev/hidg0), so that it can act as
+# USB keyboard.
 #
 # The original script (create-hid.sh) was written by Phil Polstra:
 #	- media.defcon.org/DEF CON 23/DEF CON 23 presentations/DEFCON-23-Phil-Polstra-Extras.rar
@@ -111,8 +111,7 @@ do_start()
 	echo 0x0100 > bcdDevice	    # v1.0.0
 	echo 0x0110 > bcdUSB	    # 0x0110=USB1.1, 0x0200=USB2
 
-	# 0x409 -- English
-	if mkdir_cd $KB_DIR/strings/0x409; then
+	if mkdir_cd $KB_DIR/strings/0x409; then	    # 0x409 -- English
 	    echo BeagleBoard.org Foundation > manufacturer
 	    echo BBB Keyboard > product
 	    echo 0001 > serialnumber
@@ -131,8 +130,7 @@ do_start()
 	echo 500 > MaxPower
 	ln -sf $KB_DIR/functions/hid.usb0
 
-	# 0x409 -- English
-	if mkdir_cd $KB_DIR/configs/c.1/strings/0x409; then
+	if mkdir_cd $KB_DIR/configs/c.1/strings/0x409; then	# 0x409 -- English
 	    echo Sample Configuration > configuration
 	fi
     fi
