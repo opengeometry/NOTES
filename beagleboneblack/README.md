@@ -1,6 +1,6 @@
 # BeagleBone Black (BBB) related stuffs
 
-  - [Makefile.keyboard](Makefile.keyboard) --- creates USB Gadget device.
+  - [create_keyboard.sh](create_keyboard.sh) --- creates USB Gadget device.
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
 
@@ -105,8 +105,8 @@ uname_r=5.10.168-kb
 
 ### Creating/Removing USB keyboard device
 
-- `sudo make start` --- will create USB Gadget device `/dev/hidg0`.
-- `sudo make stop` --- will remove and cleanup back to before.
+- `sudo ./create_keyboard.sh start` --- will create USB Gadget device `/dev/hidg0`.
+- `sudo ./create_keyboard.sh stop` --- will remove and cleanup back to before.
 
 ### Sending strings
 
