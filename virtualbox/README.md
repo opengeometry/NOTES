@@ -2,9 +2,7 @@
 
 ## Setting Video Memory, Base Memory, and CPU
 
-- For **Video Memory**, 128MB is the normal maximum. If you turn on/off **3D Acceleration**, 256MB is the max.
-- Sometimes, you need to change **Base Memory** and **CPU**, depending on your system load.
-
+Sometimes, you need to change **Base Memory** and **CPU**, depending on your system load.
 From command line,
 ```
 VBoxManage modifyvm "VM_Name" --vram 256 --memory=4096 --cpus=2
