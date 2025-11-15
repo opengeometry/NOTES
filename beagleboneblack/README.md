@@ -105,8 +105,8 @@ uname_r=5.10.168-kb
 
 ### Creating/Removing USB keyboard device
 
-- `sudo make -f Makefile.keyboard start` --- will create USB Gadget device `/dev/hidg0`.
-- `sudo make -f Makefile.keyboard stop` --- will remove and cleanup back to before.
+- `sudo make start` --- will create USB Gadget device `/dev/hidg0`.
+- `sudo make stop` --- will remove and cleanup back to before.
 
 ### Sending strings
 
