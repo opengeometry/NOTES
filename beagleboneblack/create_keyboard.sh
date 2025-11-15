@@ -40,6 +40,7 @@ EOF
 }
 
 # https://docs.kernel.org/usb/gadget-testing.html
+#
 # Two differences:
 #	Input (constant)    81 01 | 81 03
 #	Output (constant)   91 01 | 91 03
@@ -48,8 +49,10 @@ cat_report_descriptor_keyboard2()
 {
     xxd -r -p <<EOF
 	05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01
-	75 01 95 08 81 02 95 01  75 08 81 03 95 05 75 01
-	05 08 19 01 29 05 91 02  95 01 75 03 91 03 95 06
+	75 01 95 08 81 02 95 01  75 08 
+				       81 03 95 05 75 01
+	05 08 19 01 29 05 91 02  95 01 75 03 
+					     91 03 95 06
 	75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0
 EOF
 }
@@ -82,13 +85,12 @@ EOF
 #
 # Debian 11.7, 12.12, 13.1:
 # -------------------------
-# Factory images don't work, because most USB Gadget modules are built into the
-# kernels.  You have to recompile, and move 'usb_f_acm' and 'usb_f_serial' to
-# modules and blacklist them.  Kernels
+# Factory images don't work, because most USB Gadget modules are built into
+# the kernels.  You have to recompile, and move 'usb_f_acm' and 'usb_f_serial'
+# to modules and blacklist them.  Kernels
 #	- 5.10.168
 #	- 6.12.55
-#	- 6.17.5
-#	- 6.17.7
+#	- 6.17.5, .7, .8
 # have been recompiled and confirmed to work.
 #
 # /etc/modprobe.d/bbb-blacklist.conf:
@@ -108,19 +110,31 @@ do_start()
 	echo 0x0104 > idProduct	    # Multifunction Composite Gadget
 	echo 0x0100 > bcdDevice	    # v1.0.0
 	echo 0x0110 > bcdUSB	    # 0x0110=USB1.1, 0x0200=USB2
+
+	# 0x409 -- English
+	if mkdir_cd $KB_DIR/strings/0x409; then
+	    echo BeagleBoard.org Foundation > manufacturer
+	    echo BBB Keyboard > product
+	    echo 0001 > serialnumber
+	fi
     fi
 
     if mkdir_cd $KB_DIR/functions/hid.usb0; then
 	echo 1 > protocol	    # Keyboard
 	echo 1 > subclass
 	echo 8 > report_length
-	#cat_report_descriptor_keyboard > report_desc 
-	cat_report_descriptor_keyboard2 > report_desc 
+	cat_report_descriptor_keyboard > report_desc 
+	#cat_report_descriptor_keyboard2 > report_desc 
     fi
 
     if mkdir_cd $KB_DIR/configs/c.1; then
 	echo 500 > MaxPower
 	ln -sf $KB_DIR/functions/hid.usb0
+
+	# 0x409 -- English
+	if mkdir_cd $KB_DIR/configs/c.1/strings/0x409; then
+	    echo Sample Configuration > configuration
+	fi
     fi
 
     # Activate keyboard device.
@@ -133,14 +147,17 @@ do_start()
 
 
 # Undo what has been done, in reverse order.
+#
 do_stop()
 {
     echo "" > $KB_DIR/UDC	# deactivate
 
-    rm     $KB_DIR/configs/c.1/hid.usb0
-    rmdir  $KB_DIR/configs/c.1
-    rmdir  $KB_DIR/functions/hid.usb0
-    rmdir  $KB_DIR
+    rm    $KB_DIR/configs/c.1/hid.usb0
+    rmdir $KB_DIR/configs/c.1/strings/0x409
+    rmdir $KB_DIR/configs/c.1
+    rmdir $KB_DIR/functions/hid.usb0
+    rmdir $KB_DIR/strings/0x409
+    rmdir $KB_DIR
 
     sync && sleep 0
 }
