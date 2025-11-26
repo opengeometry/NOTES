@@ -11,7 +11,8 @@ But, I was able to upgrade to Ubuntu 24.04 and kernel 6.17.9.
 
 USB Gadget driver works only with **4.16.x** kernels (4.16.0 to 4.16.18).  And, you need to recompile the kernel
 with USB Gadget modules.  The process is the same as compiling for 
-[BeagleBone Black](https://opengeometry.github.io/NOTES/beagleboneblack).
+[BeagleBone Black](https://opengeometry.github.io/NOTES/beagleboneblack/#2-compiling-a-new-kernel).
+
 
 ### Generating uIintrd
 
