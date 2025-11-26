@@ -148,4 +148,4 @@ cp initrd.img-$KBUILD_OUTPUT /boot
 #uname_r=5.10.168-ti-r83
 uname_r=5.10.168-kb
 ```
-When BBB boots, it will look for relevant files in `/boot`, `/lib/dtbs`, and `/lib/modules`.
+When BBB boots, it will look for relevant files in `/boot`, `/boot/dtbs`, and `/lib/modules`.
