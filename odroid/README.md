@@ -1,7 +1,7 @@
 # Odroid related stuffs
 
 I have an old **Odroid U3+** that is out of production and support.  The last distro was Ubuntu 18.04.
-But, I was able to upgrade to Ubuntu 24.04 and kernel 6.17.9.
+But, I was able to upgrade to Ubuntu 20.04, 22.04, and finally 24.04 and kernel 6.17.9.
 
 ----
 ## 1. Odroid as scriptable keyboard, mouse, and screen
