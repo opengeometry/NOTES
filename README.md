@@ -1,9 +1,10 @@
-NOTES from my computer. Lists are
+NOTES from my computer:
 1. [Android](android)
 2. [ASCII](ascii)
 3. [BeagleBone Black](beagleboneblack)
 4. [Networking](networking)
-5. [Python](python)
-6. [Shell](shell)
-7. [TeX/LaTeX](tex)
-8. [VirtualBox](virtualbox)
+5. [Odroid](odroid)
+6. [Python](python)
+7. [Shell](shell)
+8. [TeX/LaTeX](tex)
+9. [VirtualBox](virtualbox)
