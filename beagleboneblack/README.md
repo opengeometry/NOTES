@@ -3,6 +3,7 @@
   - [make_keyboard.sh](make_keyboard.sh) --- creates USB Gadget devices
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
+  - [test.sh](test.sh) --- sample tests
 
 
 ----
@@ -49,7 +50,7 @@ My work here
 ### Sending text strings as "keyboard"
 
 ```
-./send_line.sh {A..Z} {a..z}
+./send_line.sh {A..Z} {a..z} > /dev/hidg0
 ```
 will send the alphabets, separated by a space and terminated by newline,
 to `/dev/hidg0`.  It's as though you typed the line on a real keyboard.  Internally,
