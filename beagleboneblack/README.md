@@ -3,7 +3,6 @@
   - [make_keyboard.sh](make_keyboard.sh) --- creates USB Gadget devices
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
-  - [test.sh](test.sh) --- sample tests
 
 
 ----
