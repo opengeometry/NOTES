@@ -102,7 +102,7 @@ export ARCH=arm
 export CROSS_COMPILE=arm-linux-gnueabihf-
 
 make kernelversion
-make oldconfig
+make olddefconfig
 make kernelrelease
 
 make  all
