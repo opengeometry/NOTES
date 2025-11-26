@@ -36,11 +36,11 @@ Usage()
 {
     cat <<EOF
 Usage:
-    sudo $0 start [keyboard, mouse, screen]
-    sudo $0 stop
-    sudo $0 clean
-    sudo $0 list
-    sudo $0 stopall
+	sudo $0 start [keyboard, mouse, screen]
+	sudo $0 stop
+	sudo $0 clean
+	sudo $0 list
+	sudo $0 stopall
 EOF
 }
 
@@ -180,6 +180,10 @@ do_start()
 {
     modprobe usb_f_hid
 
+    if ! mountpoint -q /sys/kernel/config ; then
+	mount -t configfs none /sys/kernel/config
+    fi
+
     if [[ ! -d $KB_DIR ]] && mkdir_cd $KB_DIR; then
 	echo 0x1d6b > idVendor	    # Linux Foundation
 	echo 0x0104 > idProduct	    # Multifunction Composite Gadget
@@ -236,9 +240,10 @@ do_start()
 	fi
     fi
 
-    # Activate using devices from /sys/class/udc/.
+    # Activate (ie. turn on) devices in /sys/class/udc.
+    #
     if cd $KB_DIR; then
-	echo musb-hdrc.0 > UDC		# activate
+	ls /sys/class/udc > UDC
 	chmod a+=rw /dev/hidg?
     fi
 }
@@ -254,7 +259,8 @@ do_stop()
 }
 
 
-# Undo what has been done in creating, in reverse order.
+# Undo what has been done, in reverse order.  That is, remove links first,
+# then remove directories from bottom up.
 # 
 # find /sys/kernel/config/usb_gadget/kb/ -type l -delete
 # find /sys/kernel/config/usb_gadget/kb/ -type d \( -name hid.usb? -o -name 0x409 -o -name c.1 \) -delete
@@ -282,7 +288,7 @@ do_list()
 
 # Deactivate (ie. turn off) all USB Gadgets found in the system.  Needed to
 # create your own keyboard, mouse, screen devices.  Otherwise, it will
-# complain "it's being used".
+# complain "Device or resource busy".
 #
 do_stopall()
 {

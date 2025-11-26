@@ -9,7 +9,7 @@
 # line ends with LF.
 #
 
-. $(dirname "$0")/send_functions.sh
+. $(dirname $0)/send_functions.sh
 
 while [ $# -gt 0 ]; do
     sendString "$1"
