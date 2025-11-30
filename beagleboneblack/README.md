@@ -105,20 +105,20 @@ make kernelversion
 make olddefconfig
 make kernelrelease
 
-make  all
-make  zinstall         INSTALL_PATH=boot_install
-make  dtbs_install     INSTALL_PATH=boot_install
-make  modules_install  INSTALL_MOD_PATH=modules_install
-make  headers_install  INSTALL_HDR_PATH=headers_install
+make all
+make zinstall        INSTALL_PATH=boot_install
+make dtbs_install    INSTALL_PATH=boot_install
+make modules_install INSTALL_MOD_PATH=modules_install
+make headers_install INSTALL_HDR_PATH=headers_install
 ```
 You now have a new kernel and stuffs.
 On Fedora, for some reason, `make zinstall` line doen't work, so you have to do that step manually.
 Finally, make tarballs of the 3 installed locations.
 ```
 cd $KBUILD_OUTPUT
-    tar  -cJf  boot-$KBUILD_OUTPUT.tar.xz     boot_install
-    tar  -cJf  modules-$KBUILD_OUTPUT.tar.xz  modules_install
-    tar  -cJf  headers-$KBUILD_OUTPUT.tar.xz  headers_install
+    tar -cJf boot-$KBUILD_OUTPUT.tar.xz    boot_install
+    tar -cJf modules-$KBUILD_OUTPUT.tar.xz modules_install
+    tar -cJf headers-$KBUILD_OUTPUT.tar.xz headers_install
 ```
 
 
@@ -133,8 +133,8 @@ My BBB boots okay without *initrd.img*, but you may want to generate it for comp
 ```
 export KBUILD_OUTPUT=5.10.168-kb
 
-tar  -xJf  boot-$KBUILD_OUTPUT.tar.xz     --strip-components=1  -C  /boot         --no-same-owner  --no-same-permissions
-tar  -xJf  modules-$KBUILD_OUTPUT.tar.xz  --strip-components=3  -C  /lib/modules  --no-same-owner  --no-same-permissions
+tar -xJf boot-$KBUILD_OUTPUT.tar.xz    --strip-components=1 --no-same-owner --no-same-permissions -C /boot
+tar -xJf modules-$KBUILD_OUTPUT.tar.xz --strip-components=3 --no-same-owner --no-same-permissions -C /lib/modules
 
 depmod $KBUILD_OUTPUT
 mkinitramfs -o initrd.img-$KBUILD_OUTPUT $KBUILD_OUTPUT
