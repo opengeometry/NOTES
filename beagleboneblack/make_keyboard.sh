@@ -27,9 +27,10 @@
 #	- https://github.com/ppolstra/UDeck
 #
 
-KB_DIR=/sys/kernel/config/usb_gadget/kb
 ACTION=$1	# start, stop
 TARGETS=${*:2}	# keyboard, mouse, screen
+
+KB_DIR=/sys/kernel/config/usb_gadget/kb
 
 
 Usage()
@@ -178,6 +179,8 @@ EOF
 #
 do_start()
 {
+    local target
+
     modprobe usb_f_hid
 
     if ! mountpoint -q /sys/kernel/config ; then
@@ -196,8 +199,8 @@ do_start()
 	    echo 2025-11		    > serialnumber
 	fi
 
-	for i in $TARGETS; do
-	    case $i in
+	for target in $TARGETS; do
+	    case $target in
 		keyboard)
 		    if mkdir_cd $KB_DIR/functions/hid.usb0; then
 			echo 1 > subclass	# Boot Interface subclass
@@ -225,7 +228,7 @@ do_start()
 		    fi
 		    ;;
 		*)
-		    echo "$i: unknown target, must be {keyboard, mouse, screen}."
+		    echo "$target: unknown target, must be {keyboard, mouse, screen}."
 		    ;;
 	    esac
 	done
@@ -269,9 +272,10 @@ do_clean()
 {
     if cd $KB_DIR; then
 	rm    $KB_DIR/configs/c.1/hid.usb?
+	rmdir $KB_DIR/functions/hid.usb?
+
 	rmdir $KB_DIR/configs/c.1/strings/0x409
 	rmdir $KB_DIR/configs/c.1
-	rmdir $KB_DIR/functions/hid.usb?
 	rmdir $KB_DIR/strings/0x409
 	rmdir $KB_DIR
     fi
@@ -282,7 +286,7 @@ do_clean()
 #
 do_list()
 {
-    ls /sys/kernel/config/usb_gadget/
+    ls /sys/kernel/config/usb_gadget
 }
 
 
@@ -292,6 +296,8 @@ do_list()
 #
 do_stopall()
 {
+    local i
+
     for i in /sys/kernel/config/usb_gadget/*; do
 	echo > $i/UDC
     done
@@ -299,11 +305,11 @@ do_stopall()
 
 
 case $ACTION in
-    start)    do_start    ;;
-    stop)     do_stop     ;;
-    clean)    do_clean    ;;
-    list)     do_list     ;;
-    stopall)  do_stopall  ;;
-    *)        Usage       ;;
+    start)   do_start   ;;
+    stop)    do_stop    ;;
+    clean)   do_clean   ;;
+    list)    do_list    ;;
+    stopall) do_stopall ;;
+    *)       Usage      ;;
 esac
 
