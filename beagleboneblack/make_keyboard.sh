@@ -5,11 +5,12 @@
 #
 # Usage:
 # -----
+#	     $0 list
+#	sudo $0 stopall
 #	sudo $0 start [keyboard, mouse, screen]
 #	sudo $0 stop
 #	sudo $0 clean
-#	sudo $0 list
-#	sudo $0 stopall
+#	     $0 generate_report
 #
 # This script creates USB Gadget devices on BeagleBone Black (BBB) board,
 #
@@ -27,7 +28,7 @@
 #	- https://github.com/ppolstra/UDeck
 #
 
-ACTION=$1	# start, stop
+ACTION=$1	# start, stop, ...
 TARGETS=${*:2}	# keyboard, mouse, screen
 
 KB_DIR=/sys/kernel/config/usb_gadget/kb
@@ -37,11 +38,12 @@ Usage()
 {
     cat <<EOF
 Usage:
+	     $0 list
+	sudo $0 stopall
 	sudo $0 start [keyboard, mouse, screen]
 	sudo $0 stop
 	sudo $0 clean
-	sudo $0 list
-	sudo $0 stopall
+	     $0 generate_report
 EOF
 }
 
@@ -62,12 +64,11 @@ mkdir_cd()
 cat_report_descriptor_keyboard()
 {
     xxd -r -p <<EOF
-	05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01
+	05 01 09 06 A1 01 05 07  19 E0 29 E7 15 00 25 01
 	75 01 95 08 81 02 95 01  75 08 81 01 95 05 75 01
 	05 08 19 01 29 05 91 02  95 01 75 03 91 01 95 06
-	75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0
+	75 08 15 00 25 65 05 07  19 00 29 65 81 00 C0
 EOF
-
 }
 
 
@@ -81,10 +82,10 @@ EOF
 cat_report_descriptor_keyboard3()
 {
     xxd -r -p <<EOF
-	05 01 09 06 a1 01 05 07  19 e0 29 e7 15 00 25 01
+	05 01 09 06 A1 01 05 07  19 E0 29 E7 15 00 25 01
 	75 01 95 08 81 02 95 01  75 08 81 03 95 05 75 01
 	05 08 19 01 29 05 91 02  95 01 75 03 91 03 95 06
-	75 08 15 00 25 65 05 07  19 00 29 65 81 00 c0
+	75 08 15 00 25 65 05 07  19 00 29 65 81 00 C0
 EOF
 }
 
@@ -107,11 +108,10 @@ EOF
 cat_report_descriptor_mouse()
 {
     xxd -r -p <<EOF
-	05 01 09 02 a1 01 09 01 a1 00 05 09 19 01 29 03
+	05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
 	15 00 25 01 95 03 75 01 81 02 95 01 75 05 81 01
-	05 01 09 30 09 31 15 81 25 7f 75 08 95 02 81 06
-	c0 c0
-
+	05 01 09 30 09 31 15 81 25 7F 75 08 95 02 81 06
+	C0 C0
 EOF
 }
 
@@ -131,22 +131,24 @@ EOF
 cat_report_descriptor_mouse3()
 {
     xxd -r -p <<EOF
-	05 01 09 02 a1 01 09 01 a1 00 05 09 19 01 29 03
+	05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
 	15 00 25 01 95 03 75 01 81 02 95 01 75 05 81 03
-	05 01 09 30 09 31 15 81 25 7f 75 08 95 02 81 06
-	c0 c0
+	05 01 09 30 09 31 15 81 25 7F 75 08 95 02 81 06
+	C0 C0
 EOF
 }
 
 
 # Google AI:
+# https://forums.obdev.at/viewtopic4c30.html?t=2559
+#
 #	- subclass = 1		-- Boot Interface subclass
 #	- protocol = 2		-- Mouse protocol
 #	- report_length = 5	-- 5 bytes
 #
 # Byte 1: Buttons
-# Byte 2,3: X (1 to 32767=0x7fff, scaled) -- #26 xL xH
-# Byte 4,5: Y (1 to 32767=0x7fff, scaled) -- #46 yL yH
+# Byte 2,3: X (1 to 32767=0x7fff, scaled)
+# Byte 4,5: Y (1 to 32767=0x7fff, scaled)
 # 
 # - range is scaled, so the center of screen is (0x4000,0x4000).
 #
@@ -157,13 +159,13 @@ EOF
 #	printf %b '\x01\x00\x00\x00\x00'
 #	printf %b '\x00\x00\x00\x00\x00'
 #
-cat_report_descriptor_mouse_screen()
+cat_report_descriptor_screen()
 {
     xxd -r -p <<EOF
-	05 01 09 02 a1 01 09 01 a1 00 05 09 19 01 29 03
+	05 01 09 02 A1 01 09 01 A1 00 05 09 19 01 29 03
 	15 00 25 01 95 03 75 01 81 02 95 01 75 05 81 01
-	05 01 09 30 09 31 15 00 26 ff 7f 35 00 46 ff 7f
-	75 10 95 02 81 02 c0 c0
+	05 01 09 30 09 31 15 00 26 FF 7F 35 00 46 FF 7F
+	75 10 95 02 81 02 C0 C0
 EOF
 }
 
@@ -223,8 +225,8 @@ do_start()
 		    if mkdir_cd $KB_DIR/functions/hid.usb2; then
 			echo 1 > subclass	# Boot Interface subclass
 			echo 2 > protocol	# Mouse protocol
-			echo 5 > report_length	# AI says 8 bytes, should be 5
-			cat_report_descriptor_mouse_screen > report_desc 
+			echo 5 > report_length	# 5 bytes
+			cat_report_descriptor_screen > report_desc 
 		    fi
 		    ;;
 		*)
@@ -248,6 +250,7 @@ do_start()
     if cd $KB_DIR; then
 	ls /sys/class/udc > UDC
 	chmod a+=rw /dev/hidg?
+	cd - >/dev/null
     fi
 }
 
@@ -258,6 +261,7 @@ do_stop()
 {
     if cd $KB_DIR; then
 	echo > UDC
+	cd - >/dev/null
     fi
 }
 
@@ -278,6 +282,7 @@ do_clean()
 	rmdir $KB_DIR/configs/c.1
 	rmdir $KB_DIR/strings/0x409
 	rmdir $KB_DIR
+	cd - >/dev/null
     fi
 }
 
@@ -286,7 +291,7 @@ do_clean()
 #
 do_list()
 {
-    ls /sys/kernel/config/usb_gadget
+    ls -d /sys/kernel/config/usb_gadget/*
 }
 
 
@@ -305,11 +310,11 @@ do_stopall()
 
 
 case $ACTION in
-    start)   do_start   ;;
-    stop)    do_stop    ;;
-    clean)   do_clean   ;;
-    list)    do_list    ;;
-    stopall) do_stopall ;;
-    *)       Usage      ;;
+    list)            do_list            ;;
+    stopall)         do_stopall         ;;
+    start)           do_start           ;;
+    stop)            do_stop            ;;
+    clean)           do_clean           ;;
+    *)               Usage              ;;
 esac
 
