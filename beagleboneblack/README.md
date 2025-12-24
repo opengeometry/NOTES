@@ -352,3 +352,24 @@ cd /dev/bone/counter/0/count0
     cat count
 ```
 And, it will count on both rising/falling edges, so `count` is 2x the input pulses.
+
+
+----
+## 8. USB wifi dongle
+----
+I have "ZyDAS ZD1211" based USB wifi adapter, and here is how I configured it.
+
+1. Install the firmware.
+   ```bash
+   sudo apt install firmware-zd1211
+   ```
+
+2. Configure using `iwctl`.
+   ```bash
+   iwctl
+     > device list
+     > station list
+     > station wlan0 get-networks
+     > station wlan0 connect "my_ssid"
+     > quit
+   ```
